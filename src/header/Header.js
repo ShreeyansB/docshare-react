@@ -1,19 +1,22 @@
+import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import {
   Flex,
   HStack,
   Icon,
   Link,
   Text,
+  useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import React from "react";
-import { FaGithub } from "react-icons/fa";
+import { FaGithub, FaSun, FaMoon } from "react-icons/fa";
 import { FaEnvelope } from "react-icons/fa";
 import { FaQuestionCircle } from "react-icons/fa";
 
-
 const Header = (props) => {
+  const { colorMode, toggleColorMode } = useColorMode();
+
   return (
     <Flex
       direction="row"
@@ -22,7 +25,6 @@ const Header = (props) => {
       align="center"
       justify="space-between"
       mx={{ base: "5", xl: "13vw" }}
-      bg="white"
       userSelect="none"
     >
       {/* Header Logo */}
@@ -75,6 +77,16 @@ const Header = (props) => {
             <Icon mt={2} w={6} h={6} as={FaQuestionCircle} />
           </Link>
         </motion.div>
+        <Link>
+          <Icon
+            opacity={0.8}
+            mt={colorMode === 'light' ? 2 : 1}
+            w={6} h={6}
+            as={colorMode === "light" ? FaSun : MoonIcon}
+            onClick={toggleColorMode}
+            cursor="pointer"
+          />
+        </Link>
       </HStack>
     </Flex>
   );
