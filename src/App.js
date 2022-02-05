@@ -4,6 +4,15 @@ import { supabase } from "./supabaseClient";
 import { useEffect } from "react";
 import { ChakraProvider } from "@chakra-ui/react";
 import Account from "./Account";
+import Header from "./header/Header";
+import theme from "./theme";
+
+// Font Imports
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/500.css";
+import "@fontsource/inter/700.css";
+import "@fontsource/inter/800.css";
+import "@fontsource/inter/900.css";
 
 function App() {
   const [session, setSession] = useState(null);
@@ -17,12 +26,13 @@ function App() {
   }, []);
 
   return (
-    <ChakraProvider>
-      {!session ? (
+    <ChakraProvider theme={theme}>
+      <Header />
+      {/* {!session ? (
         <Auth />
       ) : (
         <Account key={session.user.id} session={session} />
-      )}
+      )} */}
     </ChakraProvider>
   );
 }
