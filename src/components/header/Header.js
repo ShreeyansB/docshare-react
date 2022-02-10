@@ -13,6 +13,8 @@ import React from "react";
 import { FaGithub, FaSun, FaMoon } from "react-icons/fa";
 import { FaEnvelope } from "react-icons/fa";
 import { FaQuestionCircle } from "react-icons/fa";
+import LogoIcon from "./Logo/LogoIcon";
+import LogoName from "./Logo/LogoName";
 
 const Header = (props) => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -20,18 +22,25 @@ const Header = (props) => {
   return (
     <Flex
       direction="row"
-      py={5}
-      px={5}
+      py={6}
+      px={10}
       align="center"
       justify="space-between"
-      mx={{ base: "5", xl: "13vw" }}
       userSelect="none"
+      borderBottom="2px"
+      borderColor={useColorModeValue("blackAlpha.200", "whiteAlpha.100")}
     >
-      {/* Header Logo */}
-
-      <Text fontSize="3xl" fontWeight="bold" zIndex={3} position="sticky">
-        📘 Docshare
-      </Text>
+      {/* Header Brand */}
+      <Link
+        href="/"
+        onDragStart={(e) => e.preventDefault()} // to prevent dragging the logo
+        _focus={{ boxShadow: "none" }} // to remove to outline on Link focus
+      >
+        <HStack spacing={4}>
+          <LogoIcon />
+          <LogoName />
+        </HStack>
+      </Link>
 
       {/* Header Nav Links */}
 
@@ -80,8 +89,9 @@ const Header = (props) => {
         <Link>
           <Icon
             opacity={0.8}
-            mt={colorMode === 'light' ? 2 : 1}
-            w={6} h={6}
+            mt={colorMode === "light" ? 2 : 1}
+            w={6}
+            h={6}
             as={colorMode === "light" ? FaSun : MoonIcon}
             onClick={toggleColorMode}
             cursor="pointer"
