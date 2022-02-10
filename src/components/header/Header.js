@@ -1,16 +1,15 @@
-import { MoonIcon, SunIcon } from "@chakra-ui/icons";
+import { MoonIcon } from "@chakra-ui/icons";
 import {
   Flex,
   HStack,
   Icon,
   Link,
-  Text,
   useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import React from "react";
-import { FaGithub, FaSun, FaMoon } from "react-icons/fa";
+import { FaGithub, FaSun } from "react-icons/fa";
 import { FaEnvelope } from "react-icons/fa";
 import { FaQuestionCircle } from "react-icons/fa";
 import LogoIcon from "./Logo/LogoIcon";
