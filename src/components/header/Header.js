@@ -22,7 +22,7 @@ const Header = (props) => {
     <Flex
       direction="row"
       py={6}
-      px={{base: 10, md: '12vw'}}
+      px={{ base: 10, md: "10vw" }}
       align="center"
       justify="space-between"
       userSelect="none"

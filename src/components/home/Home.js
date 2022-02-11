@@ -30,7 +30,7 @@ const Home = () => {
   // Drop Shadows for Image in dark and light mode
 
   const lightDropShadow = {
-    filter: "drop-shadow(0px 36px 82px rgba(87, 41, 240,0.68))",
+    filter: "drop-shadow(0px 36px 82px rgba(87, 41, 240,0.53))",
   };
 
   const darkDropShadow = {
@@ -42,7 +42,7 @@ const Home = () => {
       <Flex
         direction={{ base: "column", md: "row" }}
         pt="1rem"
-        px="7vw"
+        px="5.7vw"
         w="100%"
         align="center"
       >
@@ -66,13 +66,18 @@ const Home = () => {
                 <img
                   src={process.env.PUBLIC_URL + "/assets/homeart.png"}
                   alt="Home Art"
-                  width="600rem"
+                  width="540rem"
                   style={useColorModeValue(lightDropShadow, darkDropShadow)}
                 />
               </picture>
             </Box>
           </Tilt>
-          <Heading textAlign="center" p={4} maxW="40rem">
+          <Heading
+            textAlign="center"
+            p={4}
+            maxW="36rem"
+            fontSize={{ base: "1.4rem", md: "1.87rem" }}
+          >
             Stay connected,{" "}
             <Text
               display="inline"
@@ -100,17 +105,21 @@ const Home = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          <Box pe={{ base: 0, md: "5vw" }} mt={{ base: '4rem', md: 0 }}>
-            <Heading fontSize="3.4rem" mb={4} lineHeight="50px">
+          <Box pe={{ base: 0, md: "3.7vw" }} mt={{ base: "4rem", md: 0 }}>
+            <Heading
+              fontSize={{ base: "2.7rem", md: "3.4rem" }}
+              mb={4}
+              lineHeight="50px"
+            >
               {formType
                 ? formTitleStrings.loginHeading
                 : formTitleStrings.signHeading}
             </Heading>
             <Text
-              fontSize="2.4rem"
+              fontSize={{ base: "1.9rem", md: "2.8rem" }}
               fontWeight="medium"
               display="inline"
-              verticalAlign="-6px"
+              verticalAlign="-8px"
               me={5}
             >
               or
@@ -119,8 +128,8 @@ const Home = () => {
               colorScheme="purple"
               variant="solid"
               borderRadius={14}
-              p={6}
-              fontSize="1.9rem"
+              p={{ base: 4, md: 6 }}
+              fontSize={{ base: "1.4rem", md: "1.9rem" }}
               onClick={switchFormHandler}
             >
               {formType
