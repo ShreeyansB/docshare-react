@@ -22,7 +22,7 @@ const LoginForm = () => {
         p={7}
         mt={10}
         boxShadow={useColorModeValue(
-          "0px 32px 96px 22px rgba(62,165,181,0.35)",
+          "0px 32px 96px 22px rgba(62,165,181,0.28)",
           "0px 32px 96px 22px rgba(0,0,0,0.33)"
         )}
       >

@@ -14,6 +14,7 @@ import { FaEnvelope } from "react-icons/fa";
 import { FaQuestionCircle } from "react-icons/fa";
 import LogoIcon from "./Logo/LogoIcon";
 import LogoName from "./Logo/LogoName";
+import { Link as RouteLink } from "react-router-dom";
 
 const Header = (props) => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -31,7 +32,8 @@ const Header = (props) => {
     >
       {/* Header Brand */}
       <Link
-        href="/"
+        as={RouteLink}
+        to="/"
         onDragStart={(e) => e.preventDefault()} // to prevent dragging the logo
         _focus={{ boxShadow: "none" }} // to remove to outline on Link focus
       >
@@ -81,7 +83,7 @@ const Header = (props) => {
             transition: { duration: 0.3 },
           }}
         >
-          <Link href="/help">
+          <Link as={RouteLink} to="/about">
             <Icon mt={2} w={6} h={6} as={FaQuestionCircle} />
           </Link>
         </motion.div>

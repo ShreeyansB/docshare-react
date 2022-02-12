@@ -36,7 +36,7 @@ const Home = () => {
   const darkDropShadow = {
     filter: "drop-shadow(0px 36px 75px rgba(0,0,0,0.99))",
   };
-
+ 
   return (
     <React.Fragment>
       <Flex
@@ -50,7 +50,7 @@ const Home = () => {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.7 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
         >
           <Tilt scale={1.07} transitionSpeed={1000}>
             <Box p={4} mb={0} onDragStart={(e) => e.preventDefault()}>

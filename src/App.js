@@ -13,7 +13,10 @@ import "@fontsource/inter/500.css";
 import "@fontsource/inter/700.css";
 import "@fontsource/inter/800.css";
 import "@fontsource/inter/900.css";
-import Home from './components/home/Home';
+import Home from "./components/home/Home";
+import { Route, Routes } from "react-router-dom";
+import About from "./components/about/About";
+import Error from "./components/error/Error";
 
 function App() {
   const [session, setSession] = useState(null);
@@ -29,12 +32,11 @@ function App() {
   return (
     <ChakraProvider theme={theme}>
       <Header />
-      <Home />
-      {/* {!session ? (
-        <Auth />
-      ) : (
-        <Account key={session.user.id} session={session} />
-      )} */}
+      <Routes>
+        <Route path="*" element={<Error />} />
+        <Route path="/" element={<Home />} exact />
+        <Route path="/about" element={<About />} />
+      </Routes>
     </ChakraProvider>
   );
 }
