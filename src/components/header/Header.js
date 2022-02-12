@@ -59,6 +59,7 @@ const Header = (props) => {
           <Link
             href="https://github.com/ShreeyansB/document-sharing-react"
             target="_blank"
+            _focus={{ outline: "none" }}
           >
             <Icon mt={2} w={6} h={6} as={FaGithub} />
           </Link>
@@ -71,7 +72,11 @@ const Header = (props) => {
             transition: { duration: 0.3 },
           }}
         >
-          <Link href="mailto:sbahadkars@gmail.com" target="_blank">
+          <Link
+            href="mailto:sbahadkars@gmail.com"
+            target="_blank"
+            _focus={{ outline: "none" }}
+          >
             <Icon mt={2} w={6} h={6} as={FaEnvelope} />
           </Link>
         </motion.div>
@@ -83,11 +88,11 @@ const Header = (props) => {
             transition: { duration: 0.3 },
           }}
         >
-          <Link as={RouteLink} to="/about">
+          <Link as={RouteLink} to="/about" _focus={{ outline: "none" }}>
             <Icon mt={2} w={6} h={6} as={FaQuestionCircle} />
           </Link>
         </motion.div>
-        <Link>
+        <Link _focus={{ outline: "none" }}>
           <Icon
             opacity={0.8}
             mt={colorMode === "light" ? 2 : 1}

@@ -1,12 +1,10 @@
 import React from "react";
 import {
   Box,
-  Text,
   useColorModeValue,
   FormControl,
   FormLabel,
   Input,
-  FormHelperText,
   Button,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
@@ -16,13 +14,14 @@ const SignUpForm = () => {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.3, delay: 0 }}
+      transition={{ duration: 0.5, delay: 0 }}
     >
       <Box
         bg={useColorModeValue("white", "whiteAlpha.50")}
         borderRadius="3xl"
         p={7}
         mt={10}
+        mb={12}
         boxShadow={useColorModeValue(
           "0px 32px 96px 22px rgba(62,165,181,0.28)",
           "0px 32px 96px 22px rgba(0,0,0,0.33)"
