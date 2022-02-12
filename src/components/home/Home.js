@@ -30,7 +30,7 @@ const Home = () => {
   // Drop Shadows for Image in dark and light mode
 
   const lightDropShadow = {
-    filter: "drop-shadow(0px 36px 82px rgba(87, 41, 240,0.53))",
+    filter: "drop-shadow(0px 36px 62px rgba(87, 41, 240,0.47))",
   };
 
   const darkDropShadow = {
@@ -116,10 +116,10 @@ const Home = () => {
                 : formTitleStrings.signHeading}
             </Heading>
             <Text
-              fontSize={{ base: "1.9rem", md: "2.8rem" }}
+              fontSize={{ base: "1.9rem", md: "2.4rem" }}
               fontWeight="medium"
               display="inline"
-              verticalAlign="-8px"
+              verticalAlign="-6px"
               me={5}
             >
               or
