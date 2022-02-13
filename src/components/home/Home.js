@@ -41,7 +41,7 @@ const Home = () => {
     <React.Fragment>
       <Flex
         direction={{ base: "column", md: "row" }}
-        pt="1rem"
+        pt={{ base: "1rem", md: "3.4rem" }}
         px="5.7vw"
         w="100%"
         align="center"
