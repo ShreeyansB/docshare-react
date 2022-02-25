@@ -6,8 +6,8 @@ import { Box } from "@chakra-ui/react";
 const HomeForm = ({ isLogin }) => {
   return (
     <Box maxW="40rem">
-      {isLogin && <SignUpForm />}
-      {!isLogin && <LoginForm />}
+      {!isLogin && <SignUpForm />}
+      {isLogin && <LoginForm />}
     </Box>
   );
 };

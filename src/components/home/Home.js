@@ -14,7 +14,7 @@ import { useState } from "react";
 import HomeForm from "./HomeForm";
 
 const Home = () => {
-  const [formType, setFormType] = useState(false);
+  const [formType, setFormType] = useState(true);
 
   const switchFormHandler = () => {
     setFormType((prevState) => !prevState);
