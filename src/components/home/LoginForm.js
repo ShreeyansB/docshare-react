@@ -7,6 +7,16 @@ import {
   Input,
   Button,
   useToast,
+  useDisclosure,
+  Modal,
+  ModalBody,
+  ModalOverlay,
+  ModalCloseButton,
+  ModalFooter,
+  ModalContent,
+  ModalHeader,
+  Text,
+  Code,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { useState } from "react";
@@ -14,13 +24,17 @@ import { supabase } from "../../supabaseClient";
 import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
-  console.log(supabase.auth.user())
+  // Login-SignUp Form State Variables
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const toast = useToast();
-  const navigate = useNavigate();
+  // Reset Form State Variables
+  const [resetEmail, setResetEmail] = useState("");
+
+  const toast = useToast(); // Hook for ChakraUI Toast
+  const navigate = useNavigate(); // Hook for navigation to other page
+  const { isOpen, onOpen, onClose } = useDisclosure(); // Hook for ChakraUI Modal
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,6 +43,8 @@ const LoginForm = () => {
       email,
       password,
     });
+
+    await new Promise(resolve => setTimeout(resolve, 800));
 
     if (error) {
       toast({
@@ -40,9 +56,37 @@ const LoginForm = () => {
         position: "top",
       });
     } else {
-      navigate("/404");
+      navigate("/done");
     }
     setIsLoading(false);
+  };
+
+  const handleForgotPassword = async () => {
+    const { error } = supabase.auth.api.resetPasswordForEmail(resetEmail);
+
+    onClose();
+
+
+
+    if (error) {
+      toast({
+        title: "Error",
+        description: error.message,
+        status: "error",
+        duration: 6000,
+        isClosable: true,
+        position: "top",
+      });
+    } else {
+      toast({
+        title: "Reset Request Sent",
+        description: "Check you email for resetting your password.",
+        status: "info",
+        duration: 6000,
+        isClosable: true,
+        position: "top",
+      });
+    }
   };
 
   return (
@@ -91,9 +135,49 @@ const LoginForm = () => {
             opacity={0.5}
             p={1}
             tabIndex={-1}
+            onClick={onOpen}
           >
             Forgot Password?
           </Button>
+
+          {/* Modal for resetting password */}
+
+          <Modal isOpen={isOpen} onClose={onClose}>
+            <ModalOverlay />
+            <ModalContent>
+              <ModalHeader>Forgot your password?</ModalHeader>
+              <ModalBody>
+                <Text>
+                  Seems like you forgot your password.
+                  <br />
+                  <br /> Enter you Email below and click{" "}
+                  <Code>Reset Password</Code> to send a reset request to your
+                  registered email.
+                </Text>
+                <Input
+                  mt={5}
+                  placeholder="name@company.com"
+                  onChange={(e) => setResetEmail(e.target.value)}
+                  value={resetEmail}
+                  type="email"
+                  id="resetEmail"
+                />
+              </ModalBody>
+              <ModalFooter>
+                <Button
+                  colorScheme="red"
+                  variant="ghost"
+                  mr={3}
+                  onClick={onClose}
+                >
+                  Close
+                </Button>
+                <Button colorScheme="teal" onClick={handleForgotPassword}>
+                  Reset Password
+                </Button>
+              </ModalFooter>
+            </ModalContent>
+          </Modal>
           <Button
             type="submit"
             variant="solid"

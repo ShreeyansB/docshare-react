@@ -1,9 +1,4 @@
-import Auth from "./Auth";
-import { useState } from "react";
-import { supabase } from "./supabaseClient";
-import { useEffect } from "react";
 import { ChakraProvider } from "@chakra-ui/react";
-import Account from "./Account";
 import Header from "./components/header/Header";
 import theme from "./theme";
 
@@ -19,16 +14,6 @@ import About from "./components/about/About";
 import Error from "./components/error/Error";
 
 function App() {
-  const [session, setSession] = useState(null);
-
-  useEffect(() => {
-    setSession(supabase.auth.session());
-
-    supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-    });
-  }, []);
-
   return (
     <ChakraProvider theme={theme}>
       <Header />
