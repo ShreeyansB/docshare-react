@@ -12,16 +12,22 @@ import Home from "./components/home/Home";
 import { Route, Routes } from "react-router-dom";
 import About from "./components/about/About";
 import Error from "./components/error/Error";
+import { supabase } from "./supabaseClient";
+import { AuthProvider } from "./contexts/Auth";
 
 function App() {
+  console.log(supabase.auth.user());
+
   return (
     <ChakraProvider theme={theme}>
-      <Header />
-      <Routes>
-        <Route path="*" element={<Error />} />
-        <Route path="/" element={<Home />} exact />
-        <Route path="/about" element={<About />} />
-      </Routes>
+      <AuthProvider>
+        <Header />
+        <Routes>
+          <Route path="*" element={<Error />} />
+          <Route path="/" element={<Home />} exact />
+          <Route path="/about" element={<About />} />
+        </Routes>
+      </AuthProvider>
     </ChakraProvider>
   );
 }

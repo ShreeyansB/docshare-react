@@ -1,5 +1,6 @@
 import { MoonIcon } from "@chakra-ui/icons";
 import {
+  Button,
   Flex,
   HStack,
   Icon,
@@ -15,8 +16,12 @@ import { FaQuestionCircle } from "react-icons/fa";
 import LogoIcon from "./Logo/LogoIcon";
 import LogoName from "./Logo/LogoName";
 import { Link as RouteLink } from "react-router-dom";
+import { supabase } from "./../../supabaseClient";
+import { useAuth } from "../../contexts/Auth";
 
 const Header = (props) => {
+  const { user } = useAuth()
+
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
@@ -103,6 +108,15 @@ const Header = (props) => {
             cursor="pointer"
           />
         </Link>
+        {user && (
+          <Button
+            colorScheme="teal"
+            variant="ghost"
+            onClick={() => supabase.auth.signOut()}
+          >
+            Log Out
+          </Button>
+        )}
       </HStack>
     </Flex>
   );

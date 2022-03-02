@@ -11,7 +11,6 @@ import {
   Modal,
   ModalBody,
   ModalOverlay,
-  ModalCloseButton,
   ModalFooter,
   ModalContent,
   ModalHeader,
@@ -22,8 +21,12 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { supabase } from "../../supabaseClient";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/Auth";
 
 const LoginForm = () => {
+  // Auth Context
+  const { signIn } = useAuth()
+
   // Login-SignUp Form State Variables
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -39,7 +42,7 @@ const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    const { error } = await supabase.auth.signIn({
+    const { error } = await signIn({
       email,
       password,
     });
@@ -56,7 +59,7 @@ const LoginForm = () => {
         position: "top",
       });
     } else {
-      navigate("/done");
+      
     }
     setIsLoading(false);
   };
@@ -65,8 +68,6 @@ const LoginForm = () => {
     const { error } = supabase.auth.api.resetPasswordForEmail(resetEmail);
 
     onClose();
-
-
 
     if (error) {
       toast({

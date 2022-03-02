@@ -22,7 +22,7 @@ const SignUpForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    const { error } = await supabase.auth.signUp({
+    const {user, error } = await supabase.auth.signUp({
       email,
       password,
     });
@@ -36,7 +36,17 @@ const SignUpForm = () => {
         isClosable: true,
         position: "top",
       });
-    } else {
+    } else if (user.aud === "authenticated") {
+      toast({
+        title: "Account already exists",
+        description: "Please login with your password to continue.",
+        status: "warning",
+        duration: 6000,
+        isClosable: true,
+        position: "top",
+      });
+    }
+    else {
       toast({
         title: "Account created.",
         description: "Please check your email for confirmation.",

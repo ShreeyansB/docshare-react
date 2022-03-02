@@ -35,7 +35,6 @@ const Home = () => {
   const [formType, setFormType] = useState(true);
 
   const checkIfPasswordReset = useCallback(() => {
-    console.log(URLFragment);
     if (URLFragment.type === "recovery") {
       onOpen();
     }
