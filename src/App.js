@@ -14,6 +14,9 @@ import About from "./components/about/About";
 import Error from "./components/error/Error";
 import { supabase } from "./supabaseClient";
 import { AuthProvider } from "./contexts/Auth";
+import AccountSettings from "./components/account/AccountSettings";
+import { ProtectedComp } from "./helpers/ProtectedComp";
+
 
 function App() {
   console.log(supabase.auth.user());
@@ -26,6 +29,12 @@ function App() {
           <Route path="*" element={<Error />} />
           <Route path="/" element={<Home />} exact />
           <Route path="/about" element={<About />} />
+          <Route
+            path="/account"
+            element={
+              <ProtectedComp Component={AccountSettings}/>
+            }
+          />
         </Routes>
       </AuthProvider>
     </ChakraProvider>

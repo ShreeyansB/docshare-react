@@ -6,8 +6,8 @@ const theme = extendTheme({
     body: "Inter",
   },
   config: {
-    initialColorMode: "light",
-    useSystemColorMode: true,
+    initialColorMode: "system",
+    useSystemColorMode: false,
   },
 });
 

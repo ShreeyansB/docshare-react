@@ -25,7 +25,7 @@ import { useAuth } from "../../contexts/Auth";
 
 const LoginForm = () => {
   // Auth Context
-  const { signIn } = useAuth()
+  const { signIn } = useAuth();
 
   // Login-SignUp Form State Variables
   const [email, setEmail] = useState("");
@@ -47,7 +47,7 @@ const LoginForm = () => {
       password,
     });
 
-    await new Promise(resolve => setTimeout(resolve, 800));
+    await new Promise((resolve) => setTimeout(resolve, 800));
 
     if (error) {
       toast({
@@ -58,10 +58,11 @@ const LoginForm = () => {
         isClosable: true,
         position: "top",
       });
+      setIsLoading(false);
     } else {
-      
+      setIsLoading(false);
+      navigate("/account");
     }
-    setIsLoading(false);
   };
 
   const handleForgotPassword = async () => {
