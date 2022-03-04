@@ -50,7 +50,7 @@ const Header = (props) => {
       {/* Header Nav Links */}
 
       <HStack
-        spacing={6}
+        spacing={{ base: 3, md: 6 }}
         color={useColorModeValue("blackAlpha.500", "whiteAlpha.500")}
       >
         <motion.div
@@ -65,7 +65,12 @@ const Header = (props) => {
             target="_blank"
             _focus={{ outline: "none" }}
           >
-            <Icon mt={2} w={6} h={6} as={FaGithub} />
+            <Icon
+              mt={2}
+              w={{ base: 5, md: 6 }}
+              h={{ base: 5, md: 6 }}
+              as={FaGithub}
+            />
           </Link>
         </motion.div>
 
@@ -81,7 +86,12 @@ const Header = (props) => {
             target="_blank"
             _focus={{ outline: "none" }}
           >
-            <Icon mt={2} w={6} h={6} as={FaEnvelope} />
+            <Icon
+              mt={2}
+              w={{ base: 5, md: 6 }}
+              h={{ base: 5, md: 6 }}
+              as={FaEnvelope}
+            />
           </Link>
         </motion.div>
 
@@ -93,15 +103,23 @@ const Header = (props) => {
           }}
         >
           <Link as={RouteLink} to="/about" _focus={{ outline: "none" }}>
-            <Icon mt={2} w={6} h={6} as={FaQuestionCircle} />
+            <Icon
+              mt={2}
+              w={{ base: 5, md: 6 }}
+              h={{ base: 5, md: 6 }}
+              as={FaQuestionCircle}
+            />
           </Link>
         </motion.div>
         <Link _focus={{ outline: "none" }}>
           <Icon
             opacity={0.8}
-            mt={colorMode === "light" ? 2 : 1}
-            w={6}
-            h={6}
+            mt={{
+              base: colorMode === "light" ? 2 : 0,
+              md: colorMode === "light" ? 2 : 1,
+            }}
+            w={{ base: 5, md: 6 }}
+            h={{ base: 5, md: 6 }}
             as={colorMode === "light" ? FaSun : MoonIcon}
             onClick={toggleColorMode}
             cursor="pointer"

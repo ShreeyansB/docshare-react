@@ -13,9 +13,10 @@ const ProfileButton = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.4, delay: 0.2 }}
     >
-      <Tooltip label={user.email} borderRadius='lg'>
+      <Tooltip label={user.email} borderRadius="lg">
         <motion.img
           initial={{
+            filter: "saturate(160%) contrast(70%) brightness(120%)", // to make image more pastel
             cursor: "pointer",
             borderRadius: "1.04rem",
             backgroundColor: "teal",
