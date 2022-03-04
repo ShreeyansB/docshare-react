@@ -34,7 +34,7 @@ import { useLocation } from "react-router-dom";
 
 let URLFragment;
 const Header = () => {
-  const { user } = useAuth();
+  const { user, event } = useAuth();
 
   const { colorMode, toggleColorMode } = useColorMode();
 
@@ -47,8 +47,8 @@ const Header = () => {
   const { update } = useAuth();
   const navigate = useNavigate();
 
-  const checkIfPasswordReset = useCallback(() => {
-    if (URLFragment.type === "recovery") {
+  const checkIfPasswordReset = useCallback((event) => {
+    if (event === "PASSWORD_RECOVERY") {
       onOpen();
     }
   }, [onOpen]);
@@ -56,37 +56,25 @@ const Header = () => {
   // Hook runs on page load to get URL Params to check if password needs to be reset.
 
   useEffect(() => {
-    console.log(location);
-    URLFragment = Object.fromEntries(
-      new URLSearchParams(location.hash.substr(1))
-    );
-    checkIfPasswordReset();
-  }, [location, checkIfPasswordReset]);
+    // URLFragment = Object.fromEntries(
+    //   new URLSearchParams(location.hash.substr(1))
+    // );
+
+    checkIfPasswordReset(event);
+  }, [event, checkIfPasswordReset]);
 
   // Possword Reset Handler
   const handleResetPassword = async () => {
-    let gError = { message: "Unhandled Exception Occured." };
-    if (URLFragment.status === "loggedreset") {
-      const { error } = await update({
-        password: resetPassword,
-      });
-      gError = error;
-    } else {
-      const { error } = await supabase.auth.api.updateUser(
-        URLFragment.access_token,
-        {
-          password: resetPassword,
-        }
-      );
-      gError = error;
-    }
+    const { error } = await update({
+      password: resetPassword,
+    });
 
     onClose();
 
-    if (gError) {
+    if (error) {
       toast({
         title: "Error",
-        description: gError.message,
+        description: error.message,
         status: "error",
         duration: 6000,
         isClosable: true,
@@ -102,7 +90,6 @@ const Header = () => {
         position: "top",
       });
     }
-    navigate(location.pathname, { replace: true });
   };
 
   return (

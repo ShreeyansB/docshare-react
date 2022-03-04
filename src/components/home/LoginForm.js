@@ -82,7 +82,7 @@ const LoginForm = () => {
     } else {
       toast({
         title: "Reset Request Sent",
-        description: "Check you email for resetting your password.",
+        description: "Check your email for resetting your password.",
         status: "info",
         duration: 6000,
         isClosable: true,

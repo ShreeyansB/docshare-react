@@ -12,14 +12,12 @@ import Home from "./components/home/Home";
 import { Route, Routes } from "react-router-dom";
 import About from "./components/about/About";
 import Error from "./components/error/Error";
-import { supabase } from "./supabaseClient";
 import { AuthProvider } from "./contexts/Auth";
 import { ProtectedComp } from "./helpers/ProtectedComp";
 import Docs from "./components/docs/Docs";
 
 
 function App() {
-  console.log(supabase.auth.user());
 
   return (
     <ChakraProvider theme={theme}>

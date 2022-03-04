@@ -13,12 +13,11 @@ import { useAuth } from "../../contexts/Auth";
 import ProfileImg from "./ProfileImg";
 import { HiOutlineLogout, HiOutlineKey } from "react-icons/hi";
 
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const ProfileButton = () => {
-  const { user, signOut } = useAuth();
+  const { user, signOut, emitEvent } = useAuth();
   const navigate = useNavigate();
-  const path = useLocation();
 
   const signOutHandler = () => {
     signOut();
@@ -26,7 +25,7 @@ const ProfileButton = () => {
   };
 
   const changePasswordHandler = () => {
-    navigate(path.pathname + "#type=recovery&status=loggedreset");
+    emitEvent("PASSWORD_RECOVERY");
   };
 
   return (
