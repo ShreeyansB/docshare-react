@@ -5,80 +5,17 @@ import {
   Heading,
   Text,
   useColorModeValue,
-  useDisclosure,
-  Modal,
-  ModalBody,
-  ModalOverlay,
-  ModalFooter,
-  ModalContent,
-  ModalHeader,
-  Input,
-  useToast,
 } from "@chakra-ui/react";
 import React from "react";
 import Tilt from "react-parallax-tilt";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import HomeForm from "./HomeForm";
-import { useEffect } from "react";
-import { supabase } from "./../../supabaseClient";
-import { useCallback } from "react";
-
-let URLFragment;
 
 const Home = () => {
-  // Password Reset State Variables
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const [resetPassword, setResetPassword] = useState("");
-  const toast = useToast();
 
   const [formType, setFormType] = useState(true);
 
-  const checkIfPasswordReset = useCallback(() => {
-    if (URLFragment.type === "recovery") {
-      onOpen();
-    }
-  }, [onOpen]);
-
-  // Hook runs on page load to get URL Params to check if password needs to be reset.
-
-  useEffect(() => {
-    URLFragment = Object.fromEntries(
-      new URLSearchParams(window.location.hash.substr(1))
-    );
-    checkIfPasswordReset();
-  }, [checkIfPasswordReset]);
-
-  const handleResetPassword = async () => {
-    const { error } = await supabase.auth.api.updateUser(
-      URLFragment.access_token,
-      {
-        password: resetPassword,
-      }
-    );
-
-    onClose();
-
-    if (error) {
-      toast({
-        title: "Error",
-        description: error.message,
-        status: "error",
-        duration: 6000,
-        isClosable: true,
-        position: "top",
-      });
-    } else {
-      toast({
-        title: "Success",
-        description: "Your password has been reset.",
-        status: "success",
-        duration: 6000,
-        isClosable: true,
-        position: "top",
-      });
-    }
-  };
 
   const switchFormHandler = () => {
     setFormType((prevState) => !prevState);
@@ -111,38 +48,6 @@ const Home = () => {
         align="center"
         justify="space-around"
       >
-        {/* Password Reset Modal */}
-        <Modal isOpen={isOpen} onClose={onClose}>
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Reset Password</ModalHeader>
-            <ModalBody>
-              <Text>Enter new password:</Text>
-              <Input
-                mt={5}
-                placeholder="password"
-                onChange={(e) => setResetPassword(e.target.value)}
-                value={resetPassword}
-                type="password"
-                id="resetPassword"
-              />
-            </ModalBody>
-
-            <ModalFooter>
-              <Button
-                colorScheme="red"
-                variant="ghost"
-                mr={3}
-                onClick={onClose}
-              >
-                Close
-              </Button>
-              <Button colorScheme="teal" onClick={handleResetPassword}>
-                Reset Password
-              </Button>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
 
         {/* Home Art */}
         <motion.div

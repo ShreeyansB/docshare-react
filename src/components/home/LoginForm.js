@@ -61,7 +61,7 @@ const LoginForm = () => {
       setIsLoading(false);
     } else {
       setIsLoading(false);
-      navigate("/account");
+      navigate("/docs");
     }
   };
 
