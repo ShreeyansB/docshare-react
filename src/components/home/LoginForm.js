@@ -60,8 +60,8 @@ const LoginForm = () => {
       });
       setIsLoading(false);
     } else {
-      setIsLoading(false);
-      navigate("/docs");
+      // setIsLoading(false); commented because func is async, was giving errors when using before navigate. State gets reset when comp is remounted, so its fine to ignore.
+      navigate("/docs")
     }
   };
 

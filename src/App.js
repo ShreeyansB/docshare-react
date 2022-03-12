@@ -16,24 +16,19 @@ import { AuthProvider } from "./contexts/Auth";
 import { ProtectedComp } from "./helpers/ProtectedComp";
 import Docs from "./components/docs/Docs";
 
-
 function App() {
-
   return (
     <ChakraProvider theme={theme}>
       <AuthProvider>
         <Header />
         <Routes>
           <Route path="*" element={<Error />} />
-          <Route path="/" element={<Home />} exact />
+          <Route path="/" element={<ProtectedComp Component={Home} toRoute='/docs' invert={true}/>} exact />
           <Route path="/about" element={<About />} />
-          <Route path="/docs" element={<Docs />} />
-          {/* <Route
-            path="/account"
-            element={
-              <ProtectedComp Component={AccountSettings}/>
-            }
-          /> */}
+          <Route
+            path="/docs"
+            element={<ProtectedComp Component={Docs} toRoute='/'/>}
+          />
         </Routes>
       </AuthProvider>
     </ChakraProvider>

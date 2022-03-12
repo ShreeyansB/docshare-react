@@ -3,7 +3,7 @@ import React from 'react'
 
 const Docs = () => {
   return (
-    <Box px='10vw' mt='3rem' w='100%'>
+    <Box px='10vw' mt='3rem' w='100%' h='100%'>
       <Heading>Main page in development.</Heading>
     </Box>
   )
