@@ -1,12 +1,29 @@
-import { Box, Heading } from '@chakra-ui/react'
-import React from 'react'
+import { Box, Text } from "@chakra-ui/react";
+import React from "react";
+import { useAuth } from "../../contexts/Auth";
+import QuickAccess from "./quick_access/QuickAccess";
 
 const Docs = () => {
-  return (
-    <Box px='10vw' mt='3rem' w='100%' h='100%'>
-      <Heading>Main page in development.</Heading>
-    </Box>
-  )
-}
+  const { user } = useAuth();
 
-export default Docs
+  return (
+    <Box pt={{ base: "1.5rem", lg: "3.4rem" }} px="10vw" w="100%" minH="100%">
+      <Box fontSize={{ base: "2xl", md: "3xl" }} mb="2rem">
+        <Text display="inline" fontWeight="light">
+          Hi
+        </Text>
+        <Text display="inline" fontWeight="semibold">
+          {" " + user.email + ","}
+        </Text>
+      </Box>
+
+      <Text fontSize="1.05rem" fontWeight="semibold" mb="1.5rem">
+        Quick Access
+      </Text>
+
+      <QuickAccess />
+    </Box>
+  );
+};
+
+export default Docs;

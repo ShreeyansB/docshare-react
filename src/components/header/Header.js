@@ -25,14 +25,11 @@ import { FaEnvelope } from "react-icons/fa";
 import { FaQuestionCircle } from "react-icons/fa";
 import LogoIcon from "./Logo/LogoIcon";
 import LogoName from "./Logo/LogoName";
-import { Link as RouteLink, useNavigate } from "react-router-dom";
+import { Link as RouteLink } from "react-router-dom";
 import { useAuth } from "../../contexts/Auth";
 import ProfileButton from "./ProfileButton";
 import { useCallback } from "react";
-import { supabase } from "../../supabaseClient";
-import { useLocation } from "react-router-dom";
 
-let URLFragment;
 const Header = () => {
   const { user, event } = useAuth();
 
@@ -42,10 +39,8 @@ const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [resetPassword, setResetPassword] = useState("");
   const toast = useToast();
-  const location = useLocation();
 
   const { update } = useAuth();
-  const navigate = useNavigate();
 
   const checkIfPasswordReset = useCallback((event) => {
     if (event === "PASSWORD_RECOVERY") {
@@ -53,13 +48,9 @@ const Header = () => {
     }
   }, [onOpen]);
 
-  // Hook runs on page load to get URL Params to check if password needs to be reset.
+  // Hook runs on page load and runs func when event var changes state
 
   useEffect(() => {
-    // URLFragment = Object.fromEntries(
-    //   new URLSearchParams(location.hash.substr(1))
-    // );
-
     checkIfPasswordReset(event);
   }, [event, checkIfPasswordReset]);
 
