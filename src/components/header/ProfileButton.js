@@ -26,6 +26,8 @@ const ProfileButton = () => {
 
   const changePasswordHandler = () => {
     emitEvent("PASSWORD_RECOVERY");
+    setTimeout(() => emitEvent("DUMMY_EVENT"), 200);
+    // Dummy event to change state so that consecutive changes are detected by useEffect
   };
 
   return (

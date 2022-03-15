@@ -58,6 +58,7 @@ const LoginForm = () => {
         isClosable: true,
         position: "top",
       });
+
       setIsLoading(false);
     } else {
       // setIsLoading(false); commented because func is async, was giving errors when using before navigate. State gets reset when comp is remounted, so its fine to ignore.

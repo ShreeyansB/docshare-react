@@ -1,6 +1,7 @@
 import { Box, Text } from "@chakra-ui/react";
 import React from "react";
 import { useAuth } from "../../contexts/Auth";
+import FilesTable from "./files_table/FilesTable";
 import QuickAccess from "./quick_access/QuickAccess";
 
 const Docs = () => {
@@ -22,6 +23,7 @@ const Docs = () => {
       </Text>
 
       <QuickAccess />
+      <FilesTable />
     </Box>
   );
 };
