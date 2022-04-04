@@ -22,6 +22,8 @@ export function DBProvider({ children }) {
 
   const value = {
     userData: userData,
+
+    // Insert Document
     insertUserFiles: async (input) => {
       const storageResponse = await supabase.storage
         .from("files")
@@ -44,8 +46,14 @@ export function DBProvider({ children }) {
       setReloadCtr((prev) => prev + 1);
       return { data, error };
     },
+
+    // State var to show loading
     isLoading: isLoading,
+
+    // State var to trigger re-render
     reload: () => setReloadCtr((prev) => prev + 1),
+
+    // Delete File
     deleteFile: async (file) => {
       const dbResponse = await supabase
         .from("userfiles")
@@ -56,10 +64,20 @@ export function DBProvider({ children }) {
 
       const storageResponse = await supabase.storage
         .from("files")
-        .remove([file.url.split('files/')[1]]);
-      console.log(file.url);
+        .remove([file.url.split("files/")[1]]);
       setReloadCtr((prev) => prev + 1);
       return { ...storageResponse };
+    },
+
+    // Change File Passcode
+    changePasscode: async (id, passcode) => {
+      let passcodeEnc = SHA256(passcode).toString();
+      const { data, error } = await supabase
+        .from("userfiles")
+        .update({ passcode: passcode === "" ? passcode : passcodeEnc })
+        .match({ id: id });
+      setReloadCtr((prev) => prev + 1);
+      return { data, error };
     },
   };
 

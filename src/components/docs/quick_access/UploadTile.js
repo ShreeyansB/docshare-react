@@ -89,9 +89,11 @@ const UploadTile = () => {
           position: "top",
         });
       }
+      setFilePath("");
+      onClose();
     }
+    await new Promise((r) => setTimeout(r, 1000));
     setIsLoading(false);
-    onClose();
   };
 
   return (
@@ -201,7 +203,10 @@ const UploadTile = () => {
               variant="ghost"
               colorScheme="red"
               me={3}
-              onClick={onClose}
+              onClick={() => {
+                setFilePath("");
+                onClose();
+              }}
               isLoading={isLoading}
             >
               Close
