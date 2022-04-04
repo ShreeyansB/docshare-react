@@ -30,14 +30,15 @@ export function DBProvider({ children }) {
           upsert: false,
         });
 
-      if (storageResponse.error) return { ...storageResponse, pee: "poo" };
-
+      if (storageResponse.error) return { ...storageResponse };
       let passcodeEnc = SHA256(input.passcode).toString();
       const { data, error } = await supabase.from("userfiles").insert([
         {
           user_id: supabase.auth.user().id,
           name: input.filePath,
           passcode: input.passcode === "" ? null : passcodeEnc,
+          size: input.file.size,
+          url: storageResponse.data.Key,
         },
       ]);
       setReloadCtr((prev) => prev + 1);

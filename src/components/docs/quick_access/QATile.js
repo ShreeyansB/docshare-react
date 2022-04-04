@@ -1,6 +1,6 @@
 import {
   Box,
-  HStack,
+  Flex,
   Text,
   VStack,
   Menu,
@@ -31,7 +31,7 @@ const QATile = ({ type, title, time }) => {
     >
       <Tooltip label={title}>
         <VStack align="start" justifyContent="space-between" h="100%">
-          <HStack
+          <Flex
             justify="space-between"
             w="100%"
             ps={{ base: 3, md: 6 }}
@@ -42,13 +42,14 @@ const QATile = ({ type, title, time }) => {
               w={{ base: "1.8rem", md: "2.3rem" }}
               h={{ base: "1.8rem", md: "2.3rem" }}
             />
-            <Menu>
+            <Menu size='xl'>
               <MenuButton
                 as={IconButton}
                 aria-label="Options"
                 icon={<FaEllipsisV />}
                 variant="ghost"
                 p={0}
+                me={1}
               />
               <MenuList
                 color={useColorModeValue("black", "white")}
@@ -64,7 +65,7 @@ const QATile = ({ type, title, time }) => {
                 <MenuItem>Delete File</MenuItem>
               </MenuList>
             </Menu>
-          </HStack>
+          </Flex>
           <Box px={{ base: 3, md: 6 }}>
             <Text
               fontSize={{ base: "0.96rem", md: "1.12rem", lg: "1.22rem" }}

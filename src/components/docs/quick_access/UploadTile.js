@@ -91,6 +91,7 @@ const UploadTile = () => {
       }
     }
     setIsLoading(false);
+    onClose();
   };
 
   return (
