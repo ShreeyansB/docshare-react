@@ -25,7 +25,7 @@ import {
 } from "react-icons/hi";
 
 const FilesTable = () => {
-  const { userData } = useDB();
+  const { userData, deleteFile } = useDB();
   const boxShadow = useColorModeValue(
     "0px 5px 30px 9px rgba(62,165,181,0.2)",
     "0px 5px 30px 0px rgba(0,0,0,0.33)"
@@ -37,10 +37,15 @@ const FilesTable = () => {
     ms: 1,
   };
 
+  const fileDeleteHandler = async (id, url) => {
+    const response = await deleteFile({ id: id, url: url });
+    console.log(response);
+  };
+
   const dataToRows = () =>
     userData.map((data, index) => {
       return (
-        <Tr key={Object.keys(data)[index]}>
+        <Tr key={data.id}>
           <Td>{data.name}</Td>
           <Td>
             {new Date(data.created_at.substring(0, 23) + "Z").toLocaleString(
@@ -75,7 +80,10 @@ const FilesTable = () => {
                 <MenuItem icon={<Icon as={HiOutlineKey} {...menuIconSize} />}>
                   Change Passcode
                 </MenuItem>
-                <MenuItem icon={<Icon as={HiOutlineTrash} {...menuIconSize} />}>
+                <MenuItem
+                  icon={<Icon as={HiOutlineTrash} {...menuIconSize} />}
+                  onClick={() => fileDeleteHandler(data.id, data.url)}
+                >
                   Delete
                 </MenuItem>
               </MenuList>
@@ -94,7 +102,7 @@ const FilesTable = () => {
             <Th>Name</Th>
             <Th>Date Uploaded</Th>
             <Th>Size</Th>
-            <Th>Lock</Th>
+            <Th>Locked</Th>
             <Th isNumeric> </Th>
           </Tr>
         </Thead>

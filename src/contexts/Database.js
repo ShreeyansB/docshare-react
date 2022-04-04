@@ -46,6 +46,21 @@ export function DBProvider({ children }) {
     },
     isLoading: isLoading,
     reload: () => setReloadCtr((prev) => prev + 1),
+    deleteFile: async (file) => {
+      const dbResponse = await supabase
+        .from("userfiles")
+        .delete()
+        .match({ id: file.id });
+
+      if (dbResponse.error) return { ...dbResponse };
+
+      const storageResponse = await supabase.storage
+        .from("files")
+        .remove([file.url.split('files/')[1]]);
+      console.log(file.url);
+      setReloadCtr((prev) => prev + 1);
+      return { ...storageResponse };
+    },
   };
 
   return <DBContext.Provider value={value}>{children}</DBContext.Provider>;
