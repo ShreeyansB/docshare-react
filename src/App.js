@@ -19,6 +19,7 @@ import { AuthProvider } from "./contexts/Auth";
 import { ProtectedComp } from "./helpers/ProtectedComp";
 import Docs from "./components/docs/Docs";
 import { DBProvider } from "./contexts/Database";
+import Download from "./components/docs/download/Download";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
               path="/docs"
               element={<ProtectedComp Component={Docs} toRoute="/" />}
             />
+            <Route path="/download/:id" element={<Download />} />
           </Routes>
         </DBProvider>
       </AuthProvider>
