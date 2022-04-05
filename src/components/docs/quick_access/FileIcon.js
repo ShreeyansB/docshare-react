@@ -10,7 +10,6 @@ const FileIcon = ({ type, w, h }) => {
         color={fileTypes[type].color}
         w={w}
         h={h}
-        shadow='2xl'
       ></Icon>
   );
 };
