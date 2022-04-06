@@ -101,7 +101,6 @@ const Download = () => {
 
   useEffect(() => {
     const controller = new AbortController();
-
     supabase
       .from("userfiles")
       .select(
@@ -113,6 +112,7 @@ const Download = () => {
         setFile(data === null ? null : data[0]);
         setIsLoading(false);
       });
+
     return () => {
       controller.abort();
     };
@@ -233,7 +233,19 @@ const Download = () => {
               }]`}
             </Button>
           </HStack>
-          <Button onClick={() => console.log(file)}>Test</Button>
+          <Button
+            onClick={async () => {
+              console.log(file);
+              const filePath = file.url.split("files/")[1];
+              console.log(filePath);
+              const { data } = await supabase.storage
+                .from("files")
+                .createSignedUrl(filePath, 120);
+              console.log(data);
+            }}
+          >
+            Test
+          </Button>
         </VStack>
       </Flex>
     );
