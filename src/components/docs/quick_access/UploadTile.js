@@ -31,6 +31,8 @@ const UploadTile = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
 
+  const supportedTypes = ["doc", "docx", "ppt", "pptx", "pdf", "zip", "xls"];
+
   // Form States
   const [filePath, setFilePath] = useState("");
   const [passcode, setPasscode] = useState("");
@@ -55,6 +57,8 @@ const UploadTile = () => {
 
   const uploadHandler = async (e) => {
     e.preventDefault();
+    const fileExtension = filePath.split(".").at(-1);
+
     setIsLoading(true);
     if (filePath === "") {
       setAlert({ status: "error", message: "Please select a file." });
@@ -67,6 +71,11 @@ const UploadTile = () => {
       setAlert({
         status: "error",
         message: "File Size exceeds 50MB",
+      });
+    } else if (supportedTypes.indexOf(fileExtension) === -1) {
+      setAlert({
+        status: "error",
+        message: "Unsupported File Type",
       });
     } else {
       setAlert();

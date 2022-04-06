@@ -37,6 +37,7 @@ import React, { useState } from "react";
 import { useDB } from "../../../contexts/Database";
 import { GoKebabVertical } from "react-icons/go";
 import { Icon } from "@chakra-ui/icons";
+import { useNavigate } from "react-router-dom";
 import {
   HiOutlineDownload,
   HiOutlineKey,
@@ -51,6 +52,7 @@ const FilesTable = () => {
   );
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
+  const navigate = useNavigate();
 
   const [isDeleteLoading, setIsDeleteLoading] = useState(false);
   const [passcode, setPasscode] = useState("");
@@ -101,6 +103,10 @@ const FilesTable = () => {
     setPasscode(e);
   };
 
+  const downloadClickHandler = (id) => {
+    navigate("/download/" + id);
+  };
+
   const dataToRows = () =>
     userData.map((data, index) => {
       return (
@@ -133,6 +139,7 @@ const FilesTable = () => {
                 py="4"
               >
                 <MenuItem
+                  onClick={() => downloadClickHandler(data.id)}
                   icon={<Icon as={HiOutlineDownload} {...menuIconSize} />}
                 >
                   Download
@@ -233,7 +240,11 @@ const FilesTable = () => {
       </Modal>
       {/* Modal End */}
       <Text mb={5}>Files</Text>
-      {isLoading && <Flex w="100%" justify='center'><Spinner size="lg" mt={5} opacity='0.4'/></Flex>}
+      {isLoading && (
+        <Flex w="100%" justify="center">
+          <Spinner size="lg" mt={5} opacity="0.4" />
+        </Flex>
+      )}
       {!isLoading && (
         <Fade in={true}>
           <Table minWidth="800px">

@@ -14,7 +14,19 @@ const fileTypes = {
     gradDark: 'linear(to-tr, #1d3f55, #112c38 90%)',
     gradLight: 'linear(to-tr, #bcd5ff, #F0F5FF 90%)'
   },
+  docx: {
+    icon: BsFileWordFill,
+    color: "blue.400",
+    gradDark: 'linear(to-tr, #1d3f55, #112c38 90%)',
+    gradLight: 'linear(to-tr, #bcd5ff, #F0F5FF 90%)'
+  },
   ppt: {
+    icon: BsFilePptFill,
+    color: "yellow.500",
+    gradDark: 'linear(to-tr, #3f3b1c, #26230b 90%)',
+    gradLight: 'linear(to-tr, #ffebbf, #FFF9EE 90%)'
+  },
+  pptx: {
     icon: BsFilePptFill,
     color: "yellow.500",
     gradDark: 'linear(to-tr, #3f3b1c, #26230b 90%)',

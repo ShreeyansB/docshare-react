@@ -74,7 +74,7 @@ export function DBProvider({ children }) {
       let passcodeEnc = SHA256(passcode).toString();
       const { data, error } = await supabase
         .from("userfiles")
-        .update({ passcode: passcode === "" ? passcode : passcodeEnc })
+        .update({ passcode: passcode === "" ? null : passcodeEnc })
         .match({ id: id });
       setReloadCtr((prev) => prev + 1);
       return { data, error };
