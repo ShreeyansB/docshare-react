@@ -140,7 +140,7 @@ const Download = () => {
               type={file.name.split(".").at(-1)}
               w="6rem"
               h="6rem"
-              py="1"
+              pt='5px'
             />
             <VStack align="start" spacing={1}>
               <Tooltip label={file.name}>
@@ -221,7 +221,7 @@ const Download = () => {
             </Box>
           )}
           <HStack spacing="3rem">
-            <Preview file={file} />
+            <Preview file={file} passcode={passcode}/>
             <Button
               colorScheme="teal"
               size="lg"
@@ -233,7 +233,7 @@ const Download = () => {
               }]`}
             </Button>
           </HStack>
-          <Button
+          {/* <Button
             onClick={async () => {
               console.log(file);
               const filePath = file.url.split("files/")[1];
@@ -245,7 +245,7 @@ const Download = () => {
             }}
           >
             Test
-          </Button>
+          </Button> */}
         </VStack>
       </Flex>
     );

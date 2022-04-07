@@ -2,7 +2,7 @@ import { Icon } from "@chakra-ui/icons";
 import React from "react";
 import fileTypes from "../../../helpers/filetypes";
 
-const FileIcon = ({ type, w, h, px, py }) => {
+const FileIcon = ({ type, w, h, px, py, pb, pt }) => {
   return (
     <Icon
       as={fileTypes[type].icon}
@@ -11,6 +11,8 @@ const FileIcon = ({ type, w, h, px, py }) => {
       h={h}
       px={px}
       py={py}
+      pb={pb}
+      pt={pt}
     ></Icon>
   );
 };

@@ -41,6 +41,7 @@ import { useNavigate } from "react-router-dom";
 import {
   HiOutlineDownload,
   HiOutlineKey,
+  HiOutlineShare,
   HiOutlineTrash,
 } from "react-icons/hi";
 
@@ -107,6 +108,10 @@ const FilesTable = () => {
     navigate("/download/" + id);
   };
 
+  const shareHandler = (id) => {
+
+  }
+
   const dataToRows = () =>
     userData.map((data, index) => {
       return (
@@ -143,6 +148,12 @@ const FilesTable = () => {
                   icon={<Icon as={HiOutlineDownload} {...menuIconSize} />}
                 >
                   Download
+                </MenuItem>
+                <MenuItem
+                  onClick={() => shareHandler(data.id)}
+                  icon={<Icon as={HiOutlineShare} {...menuIconSize} />}
+                >
+                  Share
                 </MenuItem>
                 <MenuItem
                   onClick={() => {

@@ -31,7 +31,16 @@ const UploadTile = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
 
-  const supportedTypes = ["doc", "docx", "ppt", "pptx", "pdf", "zip", "xls"];
+  const supportedTypes = [
+    "doc",
+    "docx",
+    "ppt",
+    "pptx",
+    "pdf",
+    "zip",
+    "xls",
+    "xlsx",
+  ];
 
   // Form States
   const [filePath, setFilePath] = useState("");

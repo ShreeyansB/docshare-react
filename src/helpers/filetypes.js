@@ -38,6 +38,12 @@ const fileTypes = {
     gradDark: 'linear(to-tr, #1c4f28, #0f2d16 90%)',
     gradLight: 'linear(to-tr, #a1e0b0, #E8FDE6 90%)'
   },
+  xlsx: {
+    icon: BsFileSpreadsheetFill,
+    color: "green.400",
+    gradDark: 'linear(to-tr, #1c4f28, #0f2d16 90%)',
+    gradLight: 'linear(to-tr, #a1e0b0, #E8FDE6 90%)'
+  },
   pdf: {
     icon: BsFilePdfFill,
     color: "red.400",
