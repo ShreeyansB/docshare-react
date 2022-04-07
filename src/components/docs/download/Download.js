@@ -36,7 +36,6 @@ const Download = () => {
 
   const passcodeHandler = (e) => {
     setPasscode(e);
-    console.log(passcode);
   };
 
   const downloadFile = async () => {
@@ -85,7 +84,6 @@ const Download = () => {
         position: "top",
       });
     else {
-      console.log(data);
       const blobUrl = URL.createObjectURL(data);
       const link = document.createElement("a");
       link.href = blobUrl;

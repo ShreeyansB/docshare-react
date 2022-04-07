@@ -27,7 +27,6 @@ const SignUpForm = () => {
       password,
     });
 
-    console.log(user);
 
     if (error) {
       toast({

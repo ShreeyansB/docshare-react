@@ -109,8 +109,21 @@ const FilesTable = () => {
   };
 
   const shareHandler = (id) => {
-
-  }
+    let temp = document.createElement("textarea");
+    temp.value = process.env.REACT_APP_BASE_URL + `/download/${id}`;
+    document.body.appendChild(temp);
+    temp.select();
+    document.execCommand("copy");
+    document.body.removeChild(temp);
+    toast({
+      title: "Copied",
+      description: "Download URL copied to clipboard.",
+      status: "info",
+      duration: 6000,
+      isClosable: true,
+      position: "top",
+    });
+  };
 
   const dataToRows = () =>
     userData.map((data, index) => {
