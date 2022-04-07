@@ -32,6 +32,7 @@ import {
   Fade,
   Spinner,
   Flex,
+  TableContainer,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useDB } from "../../../contexts/Database";
@@ -271,18 +272,20 @@ const FilesTable = () => {
       )}
       {!isLoading && (
         <Fade in={true}>
-          <Table minWidth="800px">
-            <Thead>
-              <Tr>
-                <Th>Name</Th>
-                <Th>Date Uploaded</Th>
-                <Th>Size</Th>
-                <Th>Locked</Th>
-                <Th isNumeric> </Th>
-              </Tr>
-            </Thead>
-            <Tbody>{dataToRows()}</Tbody>
-          </Table>
+          <TableContainer>
+            <Table minWidth="800px">
+              <Thead>
+                <Tr>
+                  <Th>Name</Th>
+                  <Th>Date Uploaded</Th>
+                  <Th>Size</Th>
+                  <Th>Locked</Th>
+                  <Th isNumeric> </Th>
+                </Tr>
+              </Thead>
+              <Tbody>{dataToRows()}</Tbody>
+            </Table>
+          </TableContainer>
         </Fade>
       )}
     </Box>
