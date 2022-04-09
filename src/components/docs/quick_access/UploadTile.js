@@ -26,6 +26,7 @@ import {
 import React, { useState } from "react";
 import { FaUpload } from "react-icons/fa";
 import { useDB } from "../../../contexts/Database";
+import classes from "./UploadTile.module.css";
 
 const UploadTile = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -117,6 +118,7 @@ const UploadTile = () => {
   return (
     <Box
       w="100%"
+      bg='whiteAlpha.50'
       h={{ base: "130px", sm: "160px", md: "200px" }}
       borderRadius="1.4rem"
       cursor="pointer"
@@ -124,6 +126,7 @@ const UploadTile = () => {
       border="2px solid"
       borderColor={useColorModeValue("blackAlpha.200", "whiteAlpha.300")}
       onClick={onOpen}
+      className={useColorModeValue(classes.dibba, classes.box)}
     >
       <Modal
         isOpen={isOpen}
