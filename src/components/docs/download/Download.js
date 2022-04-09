@@ -101,7 +101,7 @@ const Download = () => {
   const saveFileDataToCache = (data) => {
     // localStorage.removeItem("myCache");
     const temp = [];
-    const fetchedData = localStorage.getItem("myCache");
+    const fetchedData = localStorage.getItem("myCache") ?? '[]';
     if (fetchedData !== null) {
       JSON.parse(fetchedData).forEach((item) => temp.push(item));
     }

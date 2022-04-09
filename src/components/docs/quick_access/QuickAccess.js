@@ -30,12 +30,12 @@ const QuickAccess = () => {
   ));
 
   useEffect(() => {
-    setData(JSON.parse(localStorage.getItem("myCache")).reverse());
-    const recheckCache = setTimeout(
-      () =>
-        setData(JSON.parse(localStorage.getItem("myCache")).reverse() ?? []),
-      10000
-    );
+    const data = JSON.parse(localStorage.getItem("myCache") ?? "[]");
+    setData(data.reverse());
+    let recheckCache = setInterval(() => {
+      const data = JSON.parse(localStorage.getItem("myCache"));
+      if (data !== null) setData(data.reverse());
+    }, 10000);
     return () => {
       clearInterval(recheckCache);
     };
