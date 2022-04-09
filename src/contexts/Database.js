@@ -8,12 +8,17 @@ const DBContext = React.createContext();
 export function DBProvider({ children }) {
   const [isLoading, setIsLoading] = useState(true);
   const [userData, setUserData] = useState([]);
+  const [fileCapacity, setFileCapacity] = useState(0);
   const [reloadCtr, setReloadCtr] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
       const ufData = await supabase.from("userfiles").select();
       setUserData(ufData.data);
+      // File Capacity Calc
+      let consumed = 0;
+      ufData.data.forEach((item) => (consumed += item.size));
+      setFileCapacity((parseFloat(consumed) / Math.pow(10, 6)).toFixed(2));
       setIsLoading(false);
     };
 
@@ -22,7 +27,7 @@ export function DBProvider({ children }) {
 
   const value = {
     userData: userData,
-
+    fileCapacity: fileCapacity,
     // Insert Document
     insertUserFiles: async (input) => {
       const storageResponse = await supabase.storage

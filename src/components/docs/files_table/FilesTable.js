@@ -54,7 +54,6 @@ const FilesTable = () => {
   );
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
-  const navigate = useNavigate();
 
   const [isDeleteLoading, setIsDeleteLoading] = useState(false);
   const [passcode, setPasscode] = useState("");

@@ -12,8 +12,7 @@ import {
   Icon,
   useToast,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
-import { FaEllipsisV } from "react-icons/fa";
+import React from "react";
 import FileIcon from "./FileIcon";
 import fileTypes from "./../../../helpers/filetypes";
 import classes from "./QATile.module.css";
@@ -33,7 +32,6 @@ const QATile = ({ data, index }) => {
   const toast = useToast();
 
   const downloadClickHandler = (id) => {
-    // navigate("/download/" + id, );
     window.open("/download/" + id, "_blank");
   };
 
