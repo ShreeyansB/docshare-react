@@ -129,8 +129,10 @@ const FilesTable = () => {
   const dataToRows = () =>
     userData.map((data, index) => {
       return (
-        <Tr key={data.id}>
-          <Td opacity={0.5}>{index + 1 + "."}</Td>
+        <Tr key={data.id} fontWeight="medium">
+          <Td opacity={0.5} fontWeight="bold">
+            {index + 1 + "."}
+          </Td>
           <Td>{data.name}</Td>
           <Td>
             {new Date(data.created_at.substring(0, 23) + "Z").toLocaleString(
@@ -140,7 +142,7 @@ const FilesTable = () => {
           <Td>
             {(parseFloat(data.size) / Math.pow(10, 6)).toFixed(2) + " MB"}
           </Td>
-          <Td>{data.passcode ? "🔒" : ""}</Td>
+          <Td textAlign="center">{data.passcode ? "🔒" : ""}</Td>
           <Td isNumeric>
             <Menu>
               <MenuButton
@@ -265,7 +267,9 @@ const FilesTable = () => {
         </ModalContent>
       </Modal>
       {/* Modal End */}
-      <Text mb={5}>Files</Text>
+      <Text fontSize="1.05rem" fontWeight="semibold" mb={5}>
+        Files
+      </Text>
       {isLoading && (
         <Flex w="100%" justify="center">
           <Spinner size="lg" mt={5} opacity="0.4" />
@@ -274,14 +278,14 @@ const FilesTable = () => {
       {!isLoading && (
         <Fade in={true}>
           <TableContainer>
-            <Table minWidth="800px">
+            <Table minWidth="800px" size="sm">
               <Thead>
                 <Tr>
                   <Th isNumeric></Th>
                   <Th>Name</Th>
                   <Th>Date Uploaded</Th>
                   <Th>Size</Th>
-                  <Th>Locked</Th>
+                  <Th textAlign="center">Locked</Th>
                   <Th isNumeric> </Th>
                 </Tr>
               </Thead>
