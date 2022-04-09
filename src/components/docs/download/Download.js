@@ -97,6 +97,23 @@ const Download = () => {
     setIsDownloadLoading(false);
   };
 
+  const saveFileDataToCache = (data) => {
+    // localStorage.removeItem("myCache");
+    const temp = [];
+    const fetchedData = localStorage.getItem("myCache");
+    if (fetchedData !== null) {
+      JSON.parse(fetchedData).forEach((item) => temp.push(item));
+    }
+    const index = temp.findIndex((item) => item.id === data.id);
+    if (index !== -1) {
+      temp.splice(index, 1);
+    }
+    data.seen_at = new Date().toISOString();
+    if (temp.length > 11) temp.pop();
+    temp.push(data);
+    localStorage.setItem("myCache", JSON.stringify(temp));
+  };
+
   useEffect(() => {
     const controller = new AbortController();
     supabase
@@ -109,6 +126,7 @@ const Download = () => {
       .then(({ data }) => {
         setFile(data === null ? null : data[0]);
         setIsLoading(false);
+        saveFileDataToCache(data !== null ? data[0] : undefined);
       });
 
     return () => {
@@ -122,7 +140,7 @@ const Download = () => {
         <Spinner />
       </Center>
     );
-  else if (file)
+  else if (file) {
     return (
       <Flex
         direction="column"
@@ -138,7 +156,7 @@ const Download = () => {
               type={file.name.split(".").at(-1)}
               w="6rem"
               h="6rem"
-              pt='5px'
+              pt="5px"
             />
             <VStack align="start" spacing={1}>
               <Tooltip label={file.name}>
@@ -219,7 +237,7 @@ const Download = () => {
             </Box>
           )}
           <HStack spacing="3rem">
-            <Preview file={file} passcode={passcode}/>
+            <Preview file={file} passcode={passcode} />
             <Button
               colorScheme="teal"
               size="lg"
@@ -247,7 +265,7 @@ const Download = () => {
         </VStack>
       </Flex>
     );
-  else return <Navigate to="/404" />;
+  } else return <Navigate to="/404" />;
 };
 
 export default Download;

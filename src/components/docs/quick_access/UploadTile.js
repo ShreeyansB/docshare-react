@@ -63,8 +63,6 @@ const UploadTile = () => {
     setPasscode(e);
   };
 
-  const testHandler = async () => {};
-
   const uploadHandler = async (e) => {
     e.preventDefault();
     const fileExtension = filePath.split(".").at(-1);
@@ -119,7 +117,7 @@ const UploadTile = () => {
     <Box
       w="100%"
       bg='whiteAlpha.50'
-      h={{ base: "130px", sm: "160px", md: "200px" }}
+      h={{base: "160px", sm: "170px", md: "200px"}}
       borderRadius="1.4rem"
       cursor="pointer"
       py={{ base: 3, md: 6 }}
@@ -127,6 +125,7 @@ const UploadTile = () => {
       borderColor={useColorModeValue("blackAlpha.200", "whiteAlpha.300")}
       onClick={onOpen}
       className={useColorModeValue(classes.dibba, classes.box)}
+      maxW='30rem'
     >
       <Modal
         isOpen={isOpen}
