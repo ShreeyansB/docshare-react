@@ -44,7 +44,7 @@ const Docs = () => {
             colorScheme={getProgressColorScheme((fileCapacity / 50) * 100)}
             variant='subtle'
           >
-            {`${(fileCapacity / 50) * 100} / 50MB`}
+            {`${fileCapacity} / 50MB`}
           </Badge>
         </HStack>
       </Box>

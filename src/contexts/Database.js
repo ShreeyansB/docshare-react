@@ -30,6 +30,18 @@ export function DBProvider({ children }) {
     fileCapacity: fileCapacity,
     // Insert Document
     insertUserFiles: async (input) => {
+      if (
+        parseFloat(fileCapacity) +
+          parseFloat(input.file.size) / Math.pow(10, 6) >
+        50
+      ) {
+        return {
+          error: {
+            message: "Storage Capacity Full",
+          },
+        };
+      }
+      console.log("poo");
       const storageResponse = await supabase.storage
         .from("files")
         .upload(supabase.auth.user().id + "/" + input.filePath, input.file, {
