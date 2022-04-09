@@ -106,7 +106,8 @@ const FilesTable = () => {
   };
 
   const downloadClickHandler = (id) => {
-    navigate("/download/" + id);
+    // navigate("/download/" + id, );
+    window.open("/download/" + id, "_blank");
   };
 
   const shareHandler = (id) => {
@@ -130,7 +131,7 @@ const FilesTable = () => {
     userData.map((data, index) => {
       return (
         <Tr key={data.id}>
-          <Td opacity={0.5}>{index + 1 + '.'}</Td>
+          <Td opacity={0.5}>{index + 1 + "."}</Td>
           <Td>{data.name}</Td>
           <Td>
             {new Date(data.created_at.substring(0, 23) + "Z").toLocaleString(

@@ -9,16 +9,50 @@ import {
   MenuItem,
   IconButton,
   useColorModeValue,
+  Icon,
+  useToast,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import { FaEllipsisV } from "react-icons/fa";
 import FileIcon from "./FileIcon";
 import fileTypes from "./../../../helpers/filetypes";
 import classes from "./QATile.module.css";
 import ReactTimeAgo from "react-time-ago";
+import { GoKebabVertical } from "react-icons/go";
+import { HiOutlineDownload, HiOutlineShare } from "react-icons/hi";
 
 const QATile = ({ data, index }) => {
   const type = data.name.split(".").at(-1);
+  const menuIconSize = {
+    w: "5",
+    h: "5",
+    mt: 1,
+    ms: 1,
+  };
+
+  const toast = useToast();
+
+  const downloadClickHandler = (id) => {
+    // navigate("/download/" + id, );
+    window.open("/download/" + id, "_blank");
+  };
+
+  const shareHandler = (id) => {
+    let temp = document.createElement("textarea");
+    temp.value = process.env.REACT_APP_BASE_URL + `/download/${id}`;
+    document.body.appendChild(temp);
+    temp.select();
+    document.execCommand("copy");
+    document.body.removeChild(temp);
+    toast({
+      title: "Copied",
+      description: "Download URL copied to clipboard.",
+      status: "info",
+      duration: 6000,
+      isClosable: true,
+      position: "top",
+    });
+  };
 
   return (
     <Box
@@ -51,27 +85,28 @@ const QATile = ({ data, index }) => {
             w={{ base: "1.8rem", md: "2.3rem" }}
             h={{ base: "1.8rem", md: "2.3rem" }}
           />
-          <Menu size="xl">
+          <Menu>
             <MenuButton
               as={IconButton}
               aria-label="Options"
-              icon={<FaEllipsisV />}
+              icon={<GoKebabVertical />}
               variant="ghost"
-              p={0}
-              me={1}
-            />
-            <MenuList
-              color={useColorModeValue("black", "white")}
-              border="none"
-              boxShadow={useColorModeValue(
-                "0px 5px 30px 9px rgba(62,165,181,0.2)",
-                "0px 5px 30px 0px rgba(0,0,0,0.33)"
-              )}
-              borderRadius="2xl"
-              py="4"
             >
-              <MenuItem>Change Passcode</MenuItem>
-              <MenuItem>Delete File</MenuItem>
+              Options
+            </MenuButton>
+            <MenuList border="none" shadow="xl" borderRadius="2xl" py="4">
+              <MenuItem
+                onClick={() => downloadClickHandler(data.id)}
+                icon={<Icon as={HiOutlineDownload} {...menuIconSize} />}
+              >
+                Download
+              </MenuItem>
+              <MenuItem
+                onClick={() => shareHandler(data.id)}
+                icon={<Icon as={HiOutlineShare} {...menuIconSize} />}
+              >
+                Share
+              </MenuItem>
             </MenuList>
           </Menu>
         </Flex>
