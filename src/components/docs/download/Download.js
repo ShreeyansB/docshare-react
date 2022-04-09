@@ -20,6 +20,7 @@ import FileIcon from "../quick_access/FileIcon";
 import colors from "./../../../helpers/colors";
 import { SHA256 } from "crypto-js";
 import Preview from "./Preview";
+import { motion } from "framer-motion";
 
 const Download = () => {
   const params = useParams();
@@ -142,128 +143,134 @@ const Download = () => {
     );
   else if (file) {
     return (
-      <Flex
-        direction="column"
-        pt={{ base: "4rem", lg: "8rem" }}
-        px="8vw"
-        w="100%"
-        align="center"
-        justify="space-around"
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.1 }}
       >
-        <VStack align="start" spacing="10">
-          <HStack style={{ transform: "translate(-16px)" }}>
-            <FileIcon
-              type={file.name.split(".").at(-1)}
-              w="6rem"
-              h="6rem"
-              pt="5px"
-            />
-            <VStack align="start" spacing={1}>
-              <Tooltip label={file.name}>
-                <Text
-                  fontWeight="bold"
-                  fontSize={{ base: "2xl", lg: "3xl" }}
-                  noOfLines="1"
-                  maxW={{ base: "70vw", lg: "50vw" }}
-                >
-                  {file.name}
-                </Text>
-              </Tooltip>
+        <Flex
+          direction="column"
+          pt={{ base: "4rem", lg: "8rem" }}
+          px="8vw"
+          w="100%"
+          align="center"
+          justify="space-around"
+        >
+          <VStack align="start" spacing="10">
+            <HStack style={{ transform: "translate(-16px)" }}>
+              <FileIcon
+                type={file.name.split(".").at(-1)}
+                w="6rem"
+                h="6rem"
+                pt="5px"
+              />
+              <VStack align="start" spacing={1}>
+                <Tooltip label={file.name}>
+                  <Text
+                    fontWeight="bold"
+                    fontSize={{ base: "2xl", lg: "3xl" }}
+                    noOfLines="1"
+                    maxW={{ base: "70vw", lg: "50vw" }}
+                  >
+                    {file.name}
+                  </Text>
+                </Tooltip>
+                <Box>
+                  <Text
+                    fontSize="lg"
+                    fontWeight="light"
+                    display="inline"
+                    userSelect="none"
+                  >
+                    by &nbsp;
+                  </Text>
+                  <Text
+                    display="inline"
+                    fontSize="lg"
+                    fontWeight="medium"
+                    color={primColor}
+                  >
+                    {file.users.email}
+                  </Text>
+                </Box>
+                <Box>
+                  <Text
+                    fontSize="lg"
+                    fontWeight="light"
+                    display="inline"
+                    userSelect="none"
+                    maxW={{ base: "80vw", lg: "50vw" }}
+                    pe="0.87rem"
+                  >
+                    at
+                  </Text>
+                  <Text
+                    display="inline"
+                    fontWeight="bold"
+                    fontSize="md"
+                    maxW={{ base: "80vw", lg: "50vw" }}
+                    fontFamily="monospace"
+                    color={secColor}
+                  >
+                    {new Date(
+                      file.created_at.substring(0, 23) + "Z"
+                    ).toLocaleString("en-IN")}
+                  </Text>
+                </Box>
+              </VStack>
+            </HStack>
+            {file.passcode !== null && (
               <Box>
-                <Text
-                  fontSize="lg"
-                  fontWeight="light"
-                  display="inline"
-                  userSelect="none"
-                >
-                  by &nbsp;
+                <Text fontWeight="medium" mb={3}>
+                  Enter Passcode
                 </Text>
-                <Text
-                  display="inline"
-                  fontSize="lg"
-                  fontWeight="medium"
-                  color={primColor}
-                >
-                  {file.users.email}
-                </Text>
+                <HStack>
+                  <PinInput
+                    type="alphanumeric"
+                    size="md"
+                    onChange={passcodeHandler}
+                    id="passcode"
+                    mask
+                  >
+                    <PinInputField />
+                    <PinInputField />
+                    <PinInputField />
+                    <PinInputField />
+                    <PinInputField />
+                    <PinInputField />
+                  </PinInput>
+                </HStack>
               </Box>
-              <Box>
-                <Text
-                  fontSize="lg"
-                  fontWeight="light"
-                  display="inline"
-                  userSelect="none"
-                  maxW={{ base: "80vw", lg: "50vw" }}
-                  pe="0.87rem"
-                >
-                  at
-                </Text>
-                <Text
-                  display="inline"
-                  fontWeight="bold"
-                  fontSize="md"
-                  maxW={{ base: "80vw", lg: "50vw" }}
-                  fontFamily="monospace"
-                  color={secColor}
-                >
-                  {new Date(
-                    file.created_at.substring(0, 23) + "Z"
-                  ).toLocaleString("en-IN")}
-                </Text>
-              </Box>
-            </VStack>
-          </HStack>
-          {file.passcode !== null && (
-            <Box>
-              <Text fontWeight="medium" mb={3}>
-                Enter Passcode
-              </Text>
-              <HStack>
-                <PinInput
-                  type="alphanumeric"
-                  size="md"
-                  onChange={passcodeHandler}
-                  id="passcode"
-                  mask
-                >
-                  <PinInputField />
-                  <PinInputField />
-                  <PinInputField />
-                  <PinInputField />
-                  <PinInputField />
-                  <PinInputField />
-                </PinInput>
-              </HStack>
-            </Box>
-          )}
-          <HStack spacing="3rem">
-            <Preview file={file} passcode={passcode} />
-            <Button
-              colorScheme="teal"
-              size="lg"
-              onClick={downloadFile}
-              isLoading={isDownloadLoading}
-            >
-              {`Download [${
-                (parseFloat(file.size) / Math.pow(10, 6)).toFixed(2) + " MB"
-              }]`}
-            </Button>
-          </HStack>
-          {/* <Button
+            )}
+            <HStack spacing="3rem">
+              <Preview file={file} passcode={passcode} />
+              <Button
+                colorScheme="teal"
+                size="lg"
+                onClick={downloadFile}
+                isLoading={isDownloadLoading}
+              >
+                {`Download [${
+                  (parseFloat(file.size) / Math.pow(10, 6)).toFixed(2) + " MB"
+                }]`}
+              </Button>
+            </HStack>
+            {/* <Button
             onClick={async () => {
               console.log(file);
               const filePath = file.url.split("files/")[1];
               console.log(filePath);
               const { data } = await supabase.storage
-                .from("files")
-                .createSignedUrl(filePath, 120);
+              .from("files")
+              .createSignedUrl(filePath, 120);
               console.log(data);
             }}
-          >
+            >
             Test
           </Button> */}
-        </VStack>
-      </Flex>
+          </VStack>
+        </Flex>
+      </motion.div>
     );
   } else return <Navigate to="/404" />;
 };
