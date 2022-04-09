@@ -12,7 +12,7 @@ import "@fontsource/inter/700.css";
 import "@fontsource/inter/800.css";
 import "@fontsource/inter/900.css";
 import Home from "./components/home/Home";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import About from "./components/about/About";
 import Error from "./components/error/Error";
 import { AuthProvider } from "./contexts/Auth";
@@ -20,8 +20,30 @@ import { ProtectedComp } from "./helpers/ProtectedComp";
 import Docs from "./components/docs/Docs";
 import { DBProvider } from "./contexts/Database";
 import Download from "./components/docs/download/Download";
+import { useEffect } from "react";
+import { useState } from "react";
 
 function App() {
+  const titleMap = [
+    { path: "/download", title: "Docshare | Download" },
+    { path: "/docs", title: "Docshare | Dashboard" },
+    { path: "/", title: "DocShare" },
+  ];
+
+  const [pageTitle, setPageTitle] = useState("DocShare");
+
+  const curLoc = useLocation();
+
+  useEffect(() => {
+    const curTitle = titleMap.find((item) =>
+      curLoc.pathname.includes(item.path)
+    );
+    if (curTitle && curTitle.title) {
+      setPageTitle(curTitle.title);
+      document.title = curTitle.title;
+    }
+  }, [curLoc]);
+
   return (
     <ChakraProvider theme={theme}>
       <AuthProvider>
