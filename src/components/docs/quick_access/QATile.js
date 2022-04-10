@@ -76,7 +76,7 @@ const QATile = ({ data, index }) => {
             md: index < 7 ? "block" : "none",
             xl: index < 12 ? "block" : "none",
           }}
-          // onClick={() => downloadClickHandler(data.id)}
+          onClick={() => downloadClickHandler(data.id)}
         >
           <VStack align="start" justifyContent="space-between" h="100%">
             <Flex
