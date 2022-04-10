@@ -101,7 +101,7 @@ const Download = () => {
   const saveFileDataToCache = (data) => {
     // localStorage.removeItem("myCache");
     const temp = [];
-    const fetchedData = localStorage.getItem("myCache") ?? '[]';
+    const fetchedData = localStorage.getItem("myCache") ?? "[]";
     if (fetchedData !== null) {
       JSON.parse(fetchedData).forEach((item) => temp.push(item));
     }
@@ -142,6 +142,7 @@ const Download = () => {
       </Center>
     );
   else if (file) {
+    console.log(file.name);
     return (
       <motion.div
         initial={{ opacity: 0 }}
@@ -151,24 +152,24 @@ const Download = () => {
         <Flex
           direction="column"
           pt={{ base: "4rem", lg: "8rem" }}
-          px="8vw"
+          px="20vw"
           w="100%"
           align="center"
           justify="space-around"
         >
           <VStack align="start" spacing="10">
-            <HStack style={{ transform: "translate(-16px)" }}>
+            <HStack style={{ transform: "translate(-16px)" }} gap={0}>
               <FileIcon
                 type={file.name.split(".").at(-1)}
-                w="6rem"
-                h="6rem"
+                w={{ base: "4.7rem", lg: "6rem" }}
+                h={{ base: "4.7rem", lg: "6rem" }}
                 pt="5px"
               />
               <VStack align="start" spacing={1}>
                 <Tooltip label={file.name}>
                   <Text
                     fontWeight="bold"
-                    fontSize={{ base: "2xl", lg: "3xl" }}
+                    fontSize={{ base: "xl", lg: "3xl" }}
                     noOfLines="1"
                     maxW={{ base: "70vw", lg: "50vw" }}
                   >
@@ -177,7 +178,7 @@ const Download = () => {
                 </Tooltip>
                 <Box>
                   <Text
-                    fontSize="lg"
+                    fontSize={{ base: "md", lg: "lg" }}
                     fontWeight="light"
                     display="inline"
                     userSelect="none"
@@ -186,7 +187,7 @@ const Download = () => {
                   </Text>
                   <Text
                     display="inline"
-                    fontSize="lg"
+                    fontSize={{ base: "md", lg: "lg" }}
                     fontWeight="medium"
                     color={primColor}
                   >
@@ -195,7 +196,7 @@ const Download = () => {
                 </Box>
                 <Box>
                   <Text
-                    fontSize="lg"
+                    fontSize={{ base: "md", lg: "lg" }}
                     fontWeight="light"
                     display="inline"
                     userSelect="none"
@@ -207,7 +208,7 @@ const Download = () => {
                   <Text
                     display="inline"
                     fontWeight="bold"
-                    fontSize="md"
+                    fontSize={{ base: "md", lg: "lg" }}
                     maxW={{ base: "80vw", lg: "50vw" }}
                     fontFamily="monospace"
                     color={secColor}
@@ -242,11 +243,11 @@ const Download = () => {
                 </HStack>
               </Box>
             )}
-            <HStack spacing="3rem">
+            <HStack spacing={{ base: "1.5rem", lg: "3rem" }}>
               <Preview file={file} passcode={passcode} />
               <Button
                 colorScheme="teal"
-                size="lg"
+                size="md"
                 onClick={downloadFile}
                 isLoading={isDownloadLoading}
               >
@@ -255,19 +256,6 @@ const Download = () => {
                 }]`}
               </Button>
             </HStack>
-            {/* <Button
-            onClick={async () => {
-              console.log(file);
-              const filePath = file.url.split("files/")[1];
-              console.log(filePath);
-              const { data } = await supabase.storage
-              .from("files")
-              .createSignedUrl(filePath, 120);
-              console.log(data);
-            }}
-            >
-            Test
-          </Button> */}
           </VStack>
         </Flex>
       </motion.div>

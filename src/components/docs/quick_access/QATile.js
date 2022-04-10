@@ -90,18 +90,28 @@ const QATile = ({ data, index }) => {
               aria-label="Options"
               icon={<GoKebabVertical />}
               variant="ghost"
+              zIndex={5}
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
             >
               Options
             </MenuButton>
             <MenuList border="none" shadow="xl" borderRadius="2xl" py="4">
               <MenuItem
-                onClick={() => downloadClickHandler(data.id)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  downloadClickHandler(data.id);
+                }}
                 icon={<Icon as={HiOutlineDownload} {...menuIconSize} />}
               >
                 Download
               </MenuItem>
               <MenuItem
-                onClick={() => shareHandler(data.id)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  shareHandler(data.id);
+                }}
                 icon={<Icon as={HiOutlineShare} {...menuIconSize} />}
               >
                 Share

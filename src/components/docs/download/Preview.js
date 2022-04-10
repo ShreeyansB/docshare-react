@@ -71,7 +71,7 @@ const Preview = ({ file, passcode }) => {
 
   return (
     <Box>
-      <Button colorScheme="purple" size="lg" onClick={previewHandler}>
+      <Button colorScheme="purple" onClick={previewHandler} size="md">
         Preview
       </Button>
 
@@ -91,7 +91,12 @@ const Preview = ({ file, passcode }) => {
                 <DocViewer
                   pluginRenderers={DocViewerRenderers}
                   documents={[{ uri: fileURL }]}
-                  style={{ height: "87vh", width: "95vw", borderRadius: '1rem', color: 'slateblue' }}
+                  style={{
+                    height: "87vh",
+                    width: "95vw",
+                    borderRadius: "1rem",
+                    color: "slateblue",
+                  }}
                 />
               </Center>
             )}
