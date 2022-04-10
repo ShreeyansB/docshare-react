@@ -157,7 +157,7 @@ const Download = () => {
           align="center"
           justify="space-around"
         >
-          <VStack align="start" spacing="10">
+          <VStack align="start" spacing="10" ps={{ base: 0, lg: "10vw" }}>
             <HStack style={{ transform: "translate(-16px)" }} gap={0}>
               <FileIcon
                 type={file.name.split(".").at(-1)}

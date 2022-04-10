@@ -6,25 +6,6 @@ import UploadTile from "./UploadTile";
 const QuickAccess = () => {
   const [data, setData] = useState([]);
 
-  const fileData = [
-    {
-      type: "ppt",
-      title: "SE Chap 1 Slides",
-      time: "2022-03-14T22:34:56+0000",
-    },
-    {
-      type: "xls",
-      title: "Sem 5 Attendance",
-      time: "2022-03-14T22:34:56+0000",
-    },
-    {
-      type: "pdf",
-      title: "Competitive English",
-      time: "2022-03-14T22:34:56+0000",
-    },
-    { type: "zip", title: "SE Lectures", time: "2022-03-14T22:34:56+0000" },
-  ];
-
   const getTiles = data.map((item, i) => (
     <QATile key={item.id} data={item} index={i} />
   ));
@@ -35,7 +16,7 @@ const QuickAccess = () => {
     let recheckCache = setInterval(() => {
       const data = JSON.parse(localStorage.getItem("myCache"));
       if (data !== null) setData(data.reverse());
-    }, 10000);
+    }, 7000);
     return () => {
       clearInterval(recheckCache);
     };

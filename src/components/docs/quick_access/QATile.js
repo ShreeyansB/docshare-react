@@ -11,6 +11,7 @@ import {
   useColorModeValue,
   Icon,
   useToast,
+  Fade,
 } from "@chakra-ui/react";
 import React from "react";
 import FileIcon from "./FileIcon";
@@ -19,6 +20,7 @@ import classes from "./QATile.module.css";
 import ReactTimeAgo from "react-time-ago";
 import { GoKebabVertical } from "react-icons/go";
 import { HiOutlineDownload, HiOutlineShare } from "react-icons/hi";
+import { motion } from "framer-motion";
 
 const QATile = ({ data, index }) => {
   const type = data.name.split(".").at(-1);
@@ -53,116 +55,123 @@ const QATile = ({ data, index }) => {
   };
 
   return (
-    <Box
-      w="100%"
-      h={{ base: "160px", sm: "170px", md: "200px" }}
-      borderRadius="1.4rem"
-      bgGradient={useColorModeValue(
-        fileTypes[type].gradLight,
-        fileTypes[type].gradDark
-      )}
-      cursor="pointer"
-      py={{ base: 3, md: 6 }}
-      title={data.name}
-      className={useColorModeValue(classes.dibba, classes.box)}
-      display={{
-        base: index < 5 ? "block" : "none",
-        md: index < 7 ? "block" : "none",
-        xl: index < 12 ? "block" : "none",
-      }}
-      onClick={() => downloadClickHandler(data.id)}
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3, delay: 0 }}
     >
-      <VStack align="start" justifyContent="space-between" h="100%">
-        <Flex
-          justify="space-between"
-          w="100%"
-          ps={{ base: 3, md: 6 }}
-          pe={{ base: 1, md: 2 }}
-        >
-          <FileIcon
-            type={type}
-            w={{ base: "1.8rem", md: "2.3rem" }}
-            h={{ base: "1.8rem", md: "2.3rem" }}
-          />
-          <Menu>
-            <MenuButton
-              as={IconButton}
-              aria-label="Options"
-              icon={<GoKebabVertical />}
-              variant="ghost"
-              zIndex={5}
-              onClick={(e) => {
-                e.stopPropagation();
+      <Box
+        w="100%"
+        h={{ base: "160px", sm: "170px", md: "200px" }}
+        borderRadius="1.4rem"
+        bgGradient={useColorModeValue(
+          fileTypes[type].gradLight,
+          fileTypes[type].gradDark
+        )}
+        cursor="pointer"
+        py={{ base: 3, md: 6 }}
+        title={data.name}
+        className={useColorModeValue(classes.dibba, classes.box)}
+        display={{
+          base: index < 5 ? "block" : "none",
+          md: index < 7 ? "block" : "none",
+          xl: index < 12 ? "block" : "none",
+        }}
+        onClick={() => downloadClickHandler(data.id)}
+      >
+        <VStack align="start" justifyContent="space-between" h="100%">
+          <Flex
+            justify="space-between"
+            w="100%"
+            ps={{ base: 3, md: 6 }}
+            pe={{ base: 1, md: 2 }}
+          >
+            <FileIcon
+              type={type}
+              w={{ base: "1.8rem", md: "2.3rem" }}
+              h={{ base: "1.8rem", md: "2.3rem" }}
+            />
+            <Menu>
+              <MenuButton
+                as={IconButton}
+                aria-label="Options"
+                icon={<GoKebabVertical />}
+                variant="ghost"
+                zIndex={5}
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
+              >
+                Options
+              </MenuButton>
+              <MenuList border="none" shadow="xl" borderRadius="2xl" py="4">
+                <MenuItem
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    downloadClickHandler(data.id);
+                  }}
+                  icon={<Icon as={HiOutlineDownload} {...menuIconSize} />}
+                >
+                  Download
+                </MenuItem>
+                <MenuItem
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    shareHandler(data.id);
+                  }}
+                  icon={<Icon as={HiOutlineShare} {...menuIconSize} />}
+                >
+                  Share
+                </MenuItem>
+              </MenuList>
+            </Menu>
+          </Flex>
+          <Box px={{ base: 3, md: 6 }}>
+            <Text
+              fontSize={{ base: "0.96rem", md: "1.12rem", lg: "1.22rem" }}
+              fontWeight="semibold"
+              mb={0}
+              isTruncated
+              maxW={{
+                base: "30vw",
+                sm: "180px",
+                md: "220px",
+                lg: "230px",
+                xl: "200px",
               }}
             >
-              Options
-            </MenuButton>
-            <MenuList border="none" shadow="xl" borderRadius="2xl" py="4">
-              <MenuItem
-                onClick={(e) => {
-                  e.stopPropagation();
-                  downloadClickHandler(data.id);
-                }}
-                icon={<Icon as={HiOutlineDownload} {...menuIconSize} />}
-              >
-                Download
-              </MenuItem>
-              <MenuItem
-                onClick={(e) => {
-                  e.stopPropagation();
-                  shareHandler(data.id);
-                }}
-                icon={<Icon as={HiOutlineShare} {...menuIconSize} />}
-              >
-                Share
-              </MenuItem>
-            </MenuList>
-          </Menu>
-        </Flex>
-        <Box px={{ base: 3, md: 6 }}>
-          <Text
-            fontSize={{ base: "0.96rem", md: "1.12rem", lg: "1.22rem" }}
-            fontWeight="semibold"
-            mb={0}
-            isTruncated
-            maxW={{
-              base: "30vw",
-              sm: "180px",
-              md: "220px",
-              lg: "230px",
-              xl: "200px",
-            }}
-          >
-            {data.name}
-          </Text>
-          <Text
-            fontSize={{ base: "0.82rem", md: "0.86rem", lg: "0.9rem" }}
-            fontWeight="medium"
-            mb={{ base: 0, md: 2 }}
-            isTruncated
-            opacity={0.4}
-            maxW={{
-              base: "30vw",
-              sm: "180px",
-              md: "220px",
-              lg: "230px",
-              xl: "200px",
-            }}
-          >
-            {"by " + data.users.email}
-          </Text>
-          <ReactTimeAgo
-            date={new Date(data.seen_at)}
-            style={{
-              fontSize: "0.82rem",
-              fontWeight: "bold",
-              textTransform: "uppercase",
-              opacity: 0.4,
-            }}
-          />
-        </Box>
-      </VStack>
-    </Box>
+              {data.name}
+            </Text>
+            <Text
+              fontSize={{ base: "0.82rem", md: "0.86rem", lg: "0.9rem" }}
+              fontWeight="medium"
+              mb={{ base: 0, md: 2 }}
+              isTruncated
+              opacity={0.4}
+              maxW={{
+                base: "30vw",
+                sm: "180px",
+                md: "220px",
+                lg: "230px",
+                xl: "200px",
+              }}
+              title={data.users.email}
+            >
+              {"by " + data.users.email}
+            </Text>
+            <ReactTimeAgo
+              date={new Date(data.seen_at)}
+              style={{
+                fontSize: "0.82rem",
+                fontWeight: "bold",
+                textTransform: "uppercase",
+                opacity: 0.4,
+              }}
+            />
+          </Box>
+        </VStack>
+      </Box>
+    </motion.div>
   );
 };
 

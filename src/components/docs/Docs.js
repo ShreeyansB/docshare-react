@@ -1,6 +1,6 @@
 import { Badge, Box, HStack, Progress, Text } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import React from "react";
+import React, { useEffect } from "react";
 import { useAuth } from "../../contexts/Auth";
 import { useDB } from "../../contexts/Database";
 import FilesTable from "./files_table/FilesTable";
@@ -8,16 +8,20 @@ import QuickAccess from "./quick_access/QuickAccess";
 
 const Docs = () => {
   const { user } = useAuth();
-  const { fileCapacity } = useDB();
+  const { fileCapacity, reload } = useDB();
 
   const getProgressColorScheme = (value) => {
-    if (value === 0) return 'gray'
+    if (value === 0) return "gray";
     if (value < 20) return "green";
     else if (value < 40) return "teal";
     else if (value < 60) return "yellow";
     else if (value < 80) return "orange";
     else return "red";
   };
+
+  useEffect(() => {
+    reload();
+  }, []);
 
   return (
     <motion.div

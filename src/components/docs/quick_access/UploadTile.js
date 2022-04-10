@@ -116,8 +116,8 @@ const UploadTile = () => {
   return (
     <Box
       w="100%"
-      bg='whiteAlpha.50'
-      h={{base: "160px", sm: "170px", md: "200px"}}
+      bg="whiteAlpha.50"
+      h={{ base: "160px", sm: "170px", md: "200px" }}
       borderRadius="1.4rem"
       cursor="pointer"
       py={{ base: 3, md: 6 }}
@@ -125,7 +125,7 @@ const UploadTile = () => {
       borderColor={useColorModeValue("blackAlpha.200", "whiteAlpha.300")}
       onClick={onOpen}
       className={useColorModeValue(classes.dibba, classes.box)}
-      maxW='30rem'
+      maxW="30rem"
     >
       <Modal
         isOpen={isOpen}

@@ -13,11 +13,16 @@ export function DBProvider({ children }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const ufData = await supabase.from("userfiles").select();
-      setUserData(ufData.data);
+      const ufData = await supabase
+        .from("userfiles")
+        .select()
+        .order("created_at", { ascending: false })
+        .match({ user_id: supabase.auth.user()?.id ?? "e" });
+      const myData = ufData.data ?? [];
+      setUserData(myData);
       // File Capacity Calc
       let consumed = 0;
-      ufData.data.forEach((item) => (consumed += item.size));
+      myData.forEach((item) => (consumed += item.size));
       setFileCapacity((parseFloat(consumed) / Math.pow(10, 6)).toFixed(2));
       setIsLoading(false);
     };
@@ -41,7 +46,6 @@ export function DBProvider({ children }) {
           },
         };
       }
-      console.log("poo");
       const storageResponse = await supabase.storage
         .from("files")
         .upload(supabase.auth.user().id + "/" + input.filePath, input.file, {
@@ -54,7 +58,7 @@ export function DBProvider({ children }) {
       const { data, error } = await supabase.from("userfiles").insert([
         {
           user_id: supabase.auth.user().id,
-          name: input.filePath,
+          name: input.file.name,
           passcode: input.passcode === "" ? null : passcodeEnc,
           size: input.file.size,
           url: storageResponse.data.Key,
@@ -79,6 +83,12 @@ export function DBProvider({ children }) {
 
       if (dbResponse.error) return { ...dbResponse };
 
+      const localData = localStorage.getItem("myCache");
+      const parsedData = JSON.parse(localData) ?? [];
+      const index = parsedData.findIndex((item) => item.id === file.id);
+      if (index !== -1) parsedData.splice(index, 1);
+      localStorage.setItem("myCache", JSON.stringify(parsedData));
+
       const storageResponse = await supabase.storage
         .from("files")
         .remove([file.url.split("files/")[1]]);
@@ -95,6 +105,12 @@ export function DBProvider({ children }) {
         .match({ id: id });
       setReloadCtr((prev) => prev + 1);
       return { data, error };
+    },
+
+    reset: () => {
+      setUserData([]);
+      setFileCapacity(0);
+      setReloadCtr((prev) => prev + 1);
     },
   };
 

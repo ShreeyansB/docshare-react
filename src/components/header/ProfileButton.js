@@ -14,13 +14,16 @@ import ProfileImg from "./ProfileImg";
 import { HiOutlineLogout, HiOutlineKey } from "react-icons/hi";
 
 import { useNavigate } from "react-router-dom";
+import { useDB } from "../../contexts/Database";
 
 const ProfileButton = () => {
   const { user, signOut, emitEvent } = useAuth();
+  const { reset } = useDB();
   const navigate = useNavigate();
 
   const signOutHandler = () => {
     signOut();
+    reset();
     navigate("/");
   };
 

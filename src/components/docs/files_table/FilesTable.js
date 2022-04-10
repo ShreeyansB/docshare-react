@@ -33,12 +33,12 @@ import {
   Spinner,
   Flex,
   TableContainer,
+  Tag,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useDB } from "../../../contexts/Database";
 import { GoKebabVertical } from "react-icons/go";
 import { Icon } from "@chakra-ui/icons";
-import { useNavigate } from "react-router-dom";
 import {
   HiOutlineDownload,
   HiOutlineKey,
@@ -124,6 +124,19 @@ const FilesTable = () => {
       isClosable: true,
       position: "top",
     });
+  };
+
+  const getData = () => {
+    let data = [];
+    userData.forEach((item, index) => {
+      data.push({
+        name: item.name,
+        created_at: new Date(item.created_at.substring(0, 23) + "Z"),
+        size: (parseFloat(item.size) / Math.pow(10, 6)).toFixed(2) + " MB",
+        locked: item.passcode ? "🔒" : "",
+      });
+    });
+    return data;
   };
 
   const dataToRows = () =>
@@ -277,21 +290,28 @@ const FilesTable = () => {
       )}
       {!isLoading && (
         <Fade in={true}>
-          <TableContainer>
-            <Table minWidth="800px" size="sm">
-              <Thead>
-                <Tr>
-                  <Th isNumeric></Th>
-                  <Th>Name</Th>
-                  <Th>Date Uploaded</Th>
-                  <Th>Size</Th>
-                  <Th textAlign="center">Locked</Th>
-                  <Th isNumeric> </Th>
-                </Tr>
-              </Thead>
-              <Tbody>{dataToRows()}</Tbody>
-            </Table>
-          </TableContainer>
+          {userData.length === 0 && (
+            <Tag variant="subtle" colorScheme="purple" size="md">
+              No Files Uploaded
+            </Tag>
+          )}
+          {userData.length !== 0 && (
+            <TableContainer>
+              <Table minWidth="800px" size="sm">
+                <Thead>
+                  <Tr>
+                    <Th isNumeric></Th>
+                    <Th>Name</Th>
+                    <Th>Date Uploaded</Th>
+                    <Th>Size</Th>
+                    <Th textAlign="center">Locked</Th>
+                    <Th isNumeric> </Th>
+                  </Tr>
+                </Thead>
+                <Tbody>{dataToRows()}</Tbody>
+              </Table>
+            </TableContainer>
+          )}
         </Fade>
       )}
     </Box>
