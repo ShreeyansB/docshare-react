@@ -126,19 +126,6 @@ const FilesTable = () => {
     });
   };
 
-  const getData = () => {
-    let data = [];
-    userData.forEach((item, index) => {
-      data.push({
-        name: item.name,
-        created_at: new Date(item.created_at.substring(0, 23) + "Z"),
-        size: (parseFloat(item.size) / Math.pow(10, 6)).toFixed(2) + " MB",
-        locked: item.passcode ? "🔒" : "",
-      });
-    });
-    return data;
-  };
-
   const dataToRows = () =>
     userData.map((data, index) => {
       return (
