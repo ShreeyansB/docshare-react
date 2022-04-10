@@ -99,7 +99,6 @@ const Download = () => {
   };
 
   const saveFileDataToCache = (data) => {
-    // localStorage.removeItem("myCache");
     const temp = [];
     const fetchedData = localStorage.getItem("myCache") ?? "[]";
     if (fetchedData !== null) {
@@ -127,7 +126,9 @@ const Download = () => {
       .then(({ data }) => {
         setFile(data === null ? null : data[0]);
         setIsLoading(false);
-        saveFileDataToCache(data !== null ? data[0] : undefined);
+        if (data.length > 0) {
+          saveFileDataToCache(data[0]);
+        }
       });
 
     return () => {
@@ -260,7 +261,16 @@ const Download = () => {
         </Flex>
       </motion.div>
     );
-  } else return <Navigate to="/404" />;
+  } else {
+    const fetchedData = localStorage.getItem("myCache") ?? "[]";
+    const parsedData = JSON.parse(fetchedData);
+    const index = parsedData.findIndex((item) => item.id === params.id);
+    if (index !== -1) {
+      parsedData.splice(index, 1);
+      localStorage.setItem("myCache", JSON.stringify(parsedData));
+    }
+    return <Navigate to="/404" />;
+  }
 };
 
 export default Download;
