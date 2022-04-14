@@ -42,7 +42,7 @@ const Home = () => {
     <React.Fragment>
       <Flex
         direction={{ base: "column", lg: "row" }}
-        pt={{ base: "1rem", lg: "3.4rem" }}
+        pt={1}
         px="5.7vw"
         w="100%"
         align="center"
@@ -56,7 +56,7 @@ const Home = () => {
           transition={{ duration: 0.5, delay: 0.1 }}
         >
           <Tilt scale={1.07} transitionSpeed={1000}>
-            <Box p={4} mb={0} onDragStart={(e) => e.preventDefault()}>
+            <Box p={2} mb={0} onDragStart={(e) => e.preventDefault()}>
               <picture>
                 <source
                   srcSet={process.env.PUBLIC_URL + "/assets/homeart.webp"}
@@ -69,7 +69,7 @@ const Home = () => {
                 <img
                   src={process.env.PUBLIC_URL + "/assets/homeart.png"}
                   alt="Home Art"
-                  width="540rem"
+                  width="490rem"
                   style={useColorModeValue(lightDropShadow, darkDropShadow)}
                 />
               </picture>
@@ -77,9 +77,9 @@ const Home = () => {
           </Tilt>
           <Heading
             textAlign="center"
-            p={4}
+            px={2}
             maxW="36rem"
-            fontSize={{ base: "1.4rem", lg: "1.87rem" }}
+            fontSize={{ base: "1.2rem", lg: "1.5rem" }}
           >
             Stay connected,{" "}
             <Text
@@ -111,7 +111,7 @@ const Home = () => {
         >
           <Box pe={{ base: 0, lg: "3.7vw" }} mt={{ base: "4rem", lg: 0 }}>
             <Heading
-              fontSize={{ base: "2.7rem", lg: "3.4rem" }}
+              fontSize={{ base: "2.5rem", lg: "3.1rem" }}
               mb={4}
               lineHeight="50px"
             >
@@ -120,7 +120,7 @@ const Home = () => {
                 : formTitleStrings.signHeading}
             </Heading>
             <Text
-              fontSize={{ base: "1.9rem", lg: "2.4rem" }}
+              fontSize={{ base: "1.8rem", lg: "2.2rem" }}
               fontWeight="medium"
               display="inline"
               verticalAlign="-6px"
@@ -133,7 +133,7 @@ const Home = () => {
               variant="solid"
               borderRadius={14}
               p={{ base: 4, lg: 6 }}
-              fontSize={{ base: "1.4rem", lg: "1.9rem" }}
+              fontSize={{ base: "1.2rem", lg: "1.7rem" }}
               onClick={switchFormHandler}
             >
               {formType
