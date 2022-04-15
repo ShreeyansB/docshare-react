@@ -19,7 +19,8 @@ Docshare uses a number of open source projects to work properly:
 - [React](https://reactjs.org/) - JS Library for building UIs
 - [ChakraUI](https://chakra-ui.com/) - Awesome Component Library
 - [Supabase](https://supabase.com/) - Open-source Backend as a Service
-- [react-doc-viewer](https://www.npmjs.com/package/react-doc-viewer) - great packacke for rendering documents
+- [react-doc-viewer](https://www.npmjs.com/package/react-doc-viewer) - great package for rendering documents
+- [boring-avatars](https://boringavatars.com/) - API for generating unique avatars
 
 ## Screenshots
 ![ss1](https://github.com/ShreeyansB/docshare-react/raw/main/screenshots/ss1.png)
