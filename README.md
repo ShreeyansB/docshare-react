@@ -1,70 +1,32 @@
-# Getting Started with Create React App
+# docshare
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![Netlify Status](https://api.netlify.com/api/v1/badges/aca97ff1-e997-4d75-a1c7-825764a472f6/deploy-status)](https://docshr.netlify.com/)
 
-## Available Scripts
+Docshare is a document and file-sharing website made with the purpose of making the viewing and sharing of files easy.
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- Upload supported files with max size of 50MB
+- Lock files behind a passcode to ensure privacy
+- Fully Responsive with Dark Mode
+- Download and Preview Files to your liking
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Markdown is a lightweight markup language based on the formatting conventions
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Tech
+Docshare uses a number of open source projects to work properly:
 
-### `npm test`
+- [React](https://reactjs.org/) - JS Library for building UIs
+- [ChakraUI](https://chakra-ui.com/) - Awesome Component Library
+- [Supabase](https://supabase.com/) - Open-source Backend as a Service
+- [react-doc-viewer](https://www.npmjs.com/package/react-doc-viewer) - great packacke for rendering documents
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Screenshots
+![ss1](https://github.com/ShreeyansB/docshare-react/raw/main/screenshots/ss1.png)
+<br><br>
+![ss2](https://github.com/ShreeyansB/docshare-react/raw/main/screenshots/ss2.png)
+<br><br>
+<img src="https://github.com/ShreeyansB/docshare-react/raw/main/screenshots/ss3.png" width="465"/> <img src="https://github.com/ShreeyansB/docshare-react/raw/main/screenshots/ss4.png" width="465"/> 
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## License
+MIT
