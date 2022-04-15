@@ -13,7 +13,6 @@ import "@fontsource/inter/800.css";
 import "@fontsource/inter/900.css";
 import Home from "./components/home/Home";
 import { Route, Routes, useLocation } from "react-router-dom";
-import About from "./components/about/About";
 import Error from "./components/error/Error";
 import { AuthProvider } from "./contexts/Auth";
 import { ProtectedComp } from "./helpers/ProtectedComp";
@@ -58,7 +57,6 @@ function App() {
               }
               exact
             />
-            <Route path="/about" element={<About />} />
             <Route
               path="/docs"
               element={<ProtectedComp Component={Docs} toRoute="/" />}

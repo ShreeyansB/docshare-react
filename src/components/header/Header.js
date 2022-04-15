@@ -22,7 +22,6 @@ import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { FaGithub, FaSun } from "react-icons/fa";
 import { FaEnvelope } from "react-icons/fa";
-import { FaQuestionCircle } from "react-icons/fa";
 import LogoIcon from "./Logo/LogoIcon";
 import LogoName from "./Logo/LogoName";
 import { Link as RouteLink } from "react-router-dom";
@@ -183,22 +182,6 @@ const Header = () => {
           </Link>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0.8 }}
-          whileHover={{
-            opacity: 1,
-            transition: { duration: 0.3 },
-          }}
-        >
-          <Link as={RouteLink} to="/about" _focus={{ outline: "none" }}>
-            <Icon
-              mt={2}
-              w={{ base: 5, md: 6 }}
-              h={{ base: 5, md: 6 }}
-              as={FaQuestionCircle}
-            />
-          </Link>
-        </motion.div>
         <Link _focus={{ outline: "none" }}>
           <Icon
             opacity={0.8}
