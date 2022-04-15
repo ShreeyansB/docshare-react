@@ -27,7 +27,7 @@ Docshare uses a number of open source projects to work properly:
 <br><br>
 ![ss2](https://github.com/ShreeyansB/docshare-react/raw/main/screenshots/ss2.png)
 <br><br>
-<img src="https://github.com/ShreeyansB/docshare-react/raw/main/screenshots/ss3.png" width="400"/> <img src="https://github.com/ShreeyansB/docshare-react/raw/main/screenshots/ss4.png" width="400"/> 
+<img src="https://github.com/ShreeyansB/docshare-react/raw/main/screenshots/ss3.png" width="405"/> <img src="https://github.com/ShreeyansB/docshare-react/raw/main/screenshots/ss4.png" width="405"/> 
 
 ## License
 MIT
